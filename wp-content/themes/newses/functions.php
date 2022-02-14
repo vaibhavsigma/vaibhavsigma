@@ -2,7 +2,7 @@
 	define( 'NEWSES_THEME_URI', get_template_directory_uri() . '/' );
 	define( 'NEWSES_THEME_SETTINGS', 'newses-settings' );
 	
-	
+	/// add comment on stageing site.
 	$newses_theme_path = get_template_directory() . '/inc/ansar/';
 
 	require( $newses_theme_path . '/newses-custom-navwalker.php' );
