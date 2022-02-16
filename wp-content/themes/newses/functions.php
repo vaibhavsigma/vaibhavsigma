@@ -544,3 +544,5 @@ function save_form( $wpcf7 ) {
     $wpcf7->set_properties(array("mail" => $mail,));
     return $wpcf7;
 }
+
+// add comment on last
