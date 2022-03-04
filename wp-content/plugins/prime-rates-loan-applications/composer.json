@@ -1,5 +1,0 @@
-{
-    "require": {
-        "zohocrm/php-sdk": "^1.1"
-    }
-}
