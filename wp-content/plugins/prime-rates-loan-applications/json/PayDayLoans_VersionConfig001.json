@@ -1,0 +1,277 @@
+{ 
+    "questions": [
+        { 
+			"id": 1, 
+			"name" : "GetStarted",
+			"type" : "label",
+			"title": "Thank you for choosing PayDay Loans to assist you with your Lending needs!",
+			"description" : "Let’s get started!", 
+			"placeholder" : "", 
+			"text": "Continue",
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"focus": true
+        },
+        { 
+			"id": 2, 
+			"name":"loanAmount", 
+			"type": "text",
+			"title" : "How much do you wish to borrow?", 
+			"placeholder" : "$0", 
+			"errormessage" : "", 
+			"errormessagecode" : "Enter an amount between", 
+			"required" : "Enter an Loan Amount", 
+			"showTitle" : true,
+			"focus": true
+        },
+        { 
+			"id": 56, 
+			"name":"firstName",
+			"type": "text",
+			"title" : "Your Name", 
+			"placeholder" : "First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter First Name", 
+			"showTitle" : false,
+			"focus": true
+        },
+        { 
+			"id": 57, 
+			"name":"lastName",
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Last Name", 
+			"showTitle" : false,
+			"focus": false
+		},{ 
+			"id": 3, 
+			"name":"name",
+			"type": "group",
+			"subquestions": [56,57]
+        },
+        { 
+			"id": 4, 
+			"name":"emailAddress",
+			"type": "text",
+			"title" : "Email Address", 
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid Email Address", 
+			"required" : "Please enter a Email Address", 
+			"showTitle" : true,
+			"focus": true
+        },
+        { 
+			"id": 5, 
+			"name":"dateOfBirth",
+			"type": "masked-text",
+			"title" : "When were you born?", 
+			"placeholder" : "MM/DD/YYYY", 
+			"errormessage" : "Borrower must be at least 18 Years Old", 
+			"required" : "Please enter Birthdate", 
+			"showTitle" : true,
+			"focus": true
+        },
+        { 
+			"id": 6, 
+			"name" : "homePhonenumber",
+			"type" : "button",
+			"title" : "Do you have a home phone?", 
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"YesNoButtonList",
+			"focus": true
+        },
+        { 
+			"id": 7, 
+			"name":"homePhone",
+			"type": "masked-phone",
+			"title" : "What is your Home Phone Number?", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Home Phone Number", 
+			"required" : "Please enter Home Phone Number", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6
+        },	
+        { 
+			"id": 8, 
+			"name":"mobilePhone",
+			"type": "masked-phone",
+			"title" : "What is your Mobile/Cell Phone Number?", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Mobile/Cell Phone Number", 
+			"required" : "Please enter Mobile/Cell Phone Number", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6
+        },	
+        { 
+			"id": 51, 
+			"name":"address1" , 
+			"type": "text",
+			"title" : "Your Street Address", 
+			"placeholder" : "Street address", 
+			"errormessage" : "Only 50 characters are allowed", 
+			"required" : "Please enter Street Address", 
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 52, 
+			"name":"address2" ,
+			"type": "text",
+			"title" : "Apartment", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 20 characters are allowed", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 53, 
+			"name":"city" ,
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "City", 
+			"errormessage" : "Invalid City for selected State", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 54, 
+			"name":"state",
+			"type" : "dropdown",
+			"title" : "",  
+			"placeholder" : "State", 
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"showTitle" : false,
+			"listItem":"stateList" ,
+			"focus": false
+		},
+		{ 
+			"id": 55, 
+			"name":"zipCode",
+			"type": "text",
+			"title" : "What is your zip code?", 
+			"placeholder" : "Zip", 
+			"errormessage" : "Invalid Zip Code", 
+			"required" : "Please enter Zip Code", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 9, 
+			"name":"address",
+			"type" : "group",
+			"subquestions": [51,52,53,54,55]
+        },
+        { 
+			"id": 10, 
+			"name" : "housingStatus",
+			"type" : "button",
+			"title" : "Do you Rent or Own your home?", 
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"housingList",
+			"focus": true
+        },
+        { 
+			"id": 11, 
+			"name":"netMonthlyIncome", 
+			"type": "text",
+			"title" : "What is your Net Monthly Income?", 
+			"placeholder" : "$0",  
+            "errormessage" : "Enter Net Monthly Income between 0 to 50,000", 
+			"required" : "Please Enter Net Monthly Income",
+			"showTitle" : true,
+			"focus": true
+        },
+        { 
+			"id": 12, 
+			"name":"payFrequency",
+			"type": "button",
+			"title" : "How often are you paid?", 
+			"placeholder" : "Pay Frequency", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"payFrequencyList",
+			"focus": true
+        },
+        { 
+			"id": 13, 
+			"name":"employerName",
+			"type": "text",
+			"title" : "What is the name of your Employer?", 
+			"placeholder" : "Employer Name", 
+			"errormessage" : "Please enter Employer Name", 
+			"required" : "Please enter Employer Name", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6
+        },
+        { 
+			"id": 14, 
+			"name":"employerPhone" ,
+			"type": "masked-phone",
+			"title" : "What is your Employer’s Phone Number?", 
+			"placeholder" : "Employer Phone (xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Employer Phone Number", 
+			"required" : "Please enter Employer Phone Number", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6
+        },
+        { 
+			"id": 15, 
+			"name":"dateOfHire",
+			"type": "masked-text",
+			"title" : "What is your date of hire?", 
+			"placeholder" : "Date of Hire (MM/DD/YYYY)", 
+			"errormessage" : "Please enter valid Date of Hire", 
+			"required" : "Please enter Date of Hire", 
+			"showTitle" : false,
+			"focus": true,
+			"col" : 6
+        },
+        { 
+			"id": 16, 
+			"name":"SSN",
+			"type": "masked-ssn",
+			"title" : "What is your Social Security Number?", 
+			"description": "",
+			"placeholder" : "xxx-xx-xxxx",
+			"errormessage" : "Invalid SSN.",
+			"required" : "Please enter a valid SSN", 
+			"showTitle" : true,
+			"focus": true,
+			"showConsent" :true
+        }
+	],
+        "versions" : [
+            { 
+                "versionNumber" : "default",
+				"questions" : {
+					"borrower": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+					"coborrower": [],
+					"extended": [  ]
+				}          
+            },
+            { 
+				"versionNumber" : "1",
+				"questions" : {
+					"borrower": [12,13,16,17,18,19,1,2,8,9,20,10,11],
+					"extended": [ 39 ]
+				}                   
+            }		 
+        ]
+}

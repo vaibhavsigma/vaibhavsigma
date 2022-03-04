@@ -1,0 +1,600 @@
+{
+    "questions": [
+		{ 
+			"id": 1, 
+			"name":"loanAmount", 
+			"type": "text",
+			"title" : "Let’s get started!", 
+			"description": "How much would you like to borrow?",
+			"placeholder" : "$0", 
+			"errormessage" : "", 
+			"errormessagecode" : "Enter an amount between ", 
+			"required" : "Enter an amount between", 
+			"showTitle" : true,
+			"focus": true
+		},{ 
+			"id": 51, 
+			"name":"primaryOwnerFirstName",
+			"type": "text",
+			"title" : "What is your name?", 
+			"placeholder" : "First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter First Name", 
+			"showTitle" : false,
+			"focus": true
+        },
+        { 
+			"id": 52, 
+			"name":"primaryOwnerLastName",
+			"type": "text",
+			"title" : "Last Name", 
+			"placeholder" : "Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Last Name", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 2, 
+			"name":"primaryOwnerContact",
+			"type": "group",
+			"title": "What is the name of Owner {{X}}?",
+			"subquestions": [51,52]						  
+				
+		}, 
+		{ 
+			"id": 80, 
+			"name":"email",
+			"type": "login",
+			"title" : "Let's create your account.", 
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid Email Address", 
+			"required" : "Please enter a Email Address", 
+			"showTitle" : true,
+			"focus": true
+			
+		},
+		{ 
+			"id": 81, 
+			"name":"password",
+			"type": "login",
+			"title" : "Password:", 
+			"placeholder" : "Password", 
+			"errormessage" : "Please enter a Password", 
+			"required" : "Please enter a Password", 
+			"showTitle" : false,
+			"focus": false
+			
+		},
+		{ 
+			"id": 82, 
+			"name":"verifyPassword",
+			"type": "login",
+			"title" : "Verify Password:", 
+			"placeholder" : "Verify Password", 
+			"errormessage" : "Passwords do not match!", 
+			"required" : "Please enter a Verify Password", 
+			"showTitle" : false,
+			"focus": false
+			
+		},
+		{ 
+			"id": 3, 
+			"name":"login",
+			"type" : "group",
+			"title" :  "Login",
+			"subquestions": [80,81,82]
+		},
+		{ 
+			"id": 57, 
+			"name":"businessLegalName" , 
+			"type": "text",
+			"title" : "What is the name of your business?", 
+			"placeholder" : "Business Legal Name", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "Please enter Business Legal Name", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 58, 
+			"name":"DBA" ,
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "DBA Name (optional)", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 4, 
+			"name":"businessName",
+			"type" : "group",
+			"subquestions": [57,58]
+		},
+		{ 
+			"id": 59, 
+			"name":"businessAddress1" , 
+			"type": "text",
+			"title" : "Business Address", 
+			"placeholder" : "Street Address", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "Please enter Business Address", 
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 60, 
+			"name":"businessAddress2" ,
+			"type": "text",
+			"title" : "Your businessAddress 2", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 61, 
+			"name":"businessCity" ,
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "City", 
+			"errormessage" : "Invalid city for selected state", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 62, 
+			"name":"businessState",
+			"type" : "dropdown",
+			"title" : "State",  
+			"placeholder" : "State", 
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"showTitle" : false,
+			"listItem":"stateList" ,
+			"focus": false
+		},
+		{ 
+			"id": 63, 
+			"name":"businessZip",
+			"type": "text",
+			"title" : "What is your zip code?", 
+			"placeholder" : "Zip", 
+			"errormessage" : "Invalid zip code", 
+			"required" : "Please enter Zip", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 5, 
+			"name":"businessAddress",
+			"type" : "group",
+			"title" :  "Business Address",
+			"subquestions": [59,60,61,62,63]
+		},
+		{ 
+			"id": 6, 
+			"name":"industry",
+			"type" : "autocomplete",
+			"title" : "Which industry is your business in?",  
+			"placeholder" : "Type to search for Industry", 
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"showTitle" : false,
+			"listItem":"industryList" ,
+			"focus": false
+		},
+		{ 
+			"id": 7, 
+			"name":"typeOfBusiness",
+			"title": "What type of business is this?",
+			"type": "dropdown",
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"listItem":"BusinessTypelist" ,
+			"showTitle" : false,
+			"focus": true
+		},   
+		{ 
+			"id": 64,
+			"name":"businessEIN" , 
+			"type": "masked-ssn",
+			"title" : "What is your Business Taxpayer Identification Number?", 
+			"placeholder" : "EIN (xx-xxxxxxx)", 
+			"errormessage" : "Please enter valid business EIN", 
+			"required" : "",  
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 65, 
+			"name":"businessSSN" ,
+			"type": "masked-ssn",
+			"title" : "- OR -", 
+			"placeholder" : "SSN (xxx-xx-xxxx)",  
+			"errormessage" : "Please enter valid business SSN",
+			"required" : "Please enter valid business EIN OR SSN", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 8, 
+			"name":"identificationNumber",
+			"type" : "group",
+			"title" : "Business Taxpayer Identification Number", 
+			"subquestions": [64,65]
+		},
+		{ 
+			"id": 9, 
+			"name":"businessPhone",
+			"type": "masked-phone",
+			"title" : "What is Your Business Phone Number?", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Business Phone Number", 
+			"required" : "Please enter Business Phone Number", 
+			"showTitle" : true,
+			"focus": true		
+		},
+		{ 
+			"id": 10, 
+			"name":"yearsInBusiness",
+			"type": "text",
+			"title" : "How many years have you been in Business?", 
+			"placeholder" : "Years In Business", 
+			"errormessagecode" : "Enter Year In Business between 1 and 100", 
+			"required" : "Please enter Years In Business", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{
+			"id": 11, 
+			"name":"estimatedRevenue",
+			"type": "text",
+			"title" : "What is your estimated Annual Revenue?", 
+			"placeholder" : "$0", 
+			"errormessage" : "",
+			"required" : "Please enter Annual Revenue", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{
+			"id": 12, 
+			"name":"avgBankBalance",
+			"type": "text",
+			"title" : "What is your Average Business Bank Balance over the past 12 months?", 
+			"placeholder" : "$0", 
+			"errormessage" : "", 
+			"errormessagecode" : "Insufficient Average Bank Balance",
+			"required" : "Please enter Average Bank Balance", 
+			"showTitle" : true,
+			"focus": true
+        },
+		{ 
+			"id": 13, 
+			"name":"ownerTitle",
+			"type" : "dropdown",
+			"title" : "What is your Title?",  
+			"placeholder" : "Title", 
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"showTitle" : false,
+			"listItem":"titleList" ,
+			"focus": true
+		},
+		{ 
+			"id": 14, 
+			"name":"primaryPercentOwnership",
+			"type": "text",
+			"title" : "What Percentage of the Business do you own?", 
+			"placeholder" : "%", 
+			"errormessage" : "Please enter Ownership Percentage between {{X}} and 100", 
+			"required" : "Total Ownership Percentage cannot exceed 100%", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 73, 
+			"name":"ownerSSN" ,
+			"type": "masked-ssn",
+			"title" : "Your Personal Taxpayer Identification Number", 
+			"placeholder" : "SSN (xxx-xx-xxxx)",  
+			"errormessage" : "Please enter valid Owner SSN",
+			"required" : "", 
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 74, 
+			"name":"ownerEIN" , 
+			"type": "masked-ssn",
+			"title" : "- OR -", 
+			"placeholder" : "TIN (xx-xxxxxxx)", 
+			"errormessage" : "Please enter valid Owner TIN", 
+			"required" : "Please enter valid Owner SSN OR TIN", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 15, 
+			"name":"ownerIdentificationNumber",
+			"type" : "group",
+			"title" : "Owner {{X}}’s Taxpayer Identification Number", 
+			"subquestions": [73,74]
+		},
+		{ 
+			"id": 16, 
+			"name" : "ownerTaxWithSpouse",
+			"type" : "button",
+			"title" : "Do you file your personal tax jointly with your spouse / partner?",
+			"description": "",
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"listItem":"YesNoButtonList",
+			"focus": true
+		},
+		{ 
+			"id": 83, 
+			"name":"spouseFirstName",
+			"type": "text",
+			"title" : "Spouse's Details", 
+			"placeholder" : "Spouse's First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Spouse's First Name", 
+			"showTitle" : false,
+			"focus": true
+        },
+        { 
+			"id": 84, 
+			"name":"spouseLastName",
+			"type": "text",
+			"title" : "Spouse's Last Name", 
+			"placeholder" : "Spouse's Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Spouse's Last Name", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 85, 
+			"name":"spouseSSN" ,
+			"type": "masked-ssn",
+			"title" : "", 
+			"placeholder" : "Spouse's SSN (xxx-xx-xxxx)",  
+			"errormessage" : "Please enter valid Spouse's SSN",
+			"required" : "Please enter Spouse's SSN", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 20, 
+			"name":"spouseDetails",
+			"type" : "group",
+			"title" : "Spouse's Details", 
+			"subquestions": [83,84,85]
+		},
+		{ 
+			"id": 17, 
+			"name":"ownerDOB",
+			"type": "masked-date",
+			"title" : "What is your Date of Birth?",
+			"placeholder" : "MM/DD/YYYY", 
+			"errormessage" : "Date of Birth must be at least 18 years old", 
+			"required" : "Please enter Date of Birth", 
+			"showTitle" : true,
+			"focus": true
+        },{ 
+			"id": 18, 
+			"name":"ownerPersonalPhone",
+			"type": "masked-phone",
+			"title" : "What is your Personal Phone Number?", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Personal Phone Number", 
+			"required" : "Please enter Personal Phone Number", 
+			"showTitle" : true,
+			"focus": true		
+		},
+		{ 
+			"id": 75, 
+			"name":"ownerAddress1" , 
+			"type": "text",
+			"title" : "Your Personal Address", 
+			"placeholder" : "Street Address", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "Please enter owner Address", 
+			"showTitle" : false,
+			"focus": true,
+			"showConsent" :true
+		},
+		{ 
+			"id": 76, 
+			"name":"ownerAddress2" ,
+			"type": "text",
+			"title" : "Your owner Address2", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 50 characters is allowed", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 77, 
+			"name":"ownerCity" ,
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "City", 
+			"errormessage" : "Invalid city for selected state", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 78, 
+			"name":"ownerState",
+			"type" : "dropdown",
+			"title" : "State",  
+			"placeholder" : "State", 
+			"errormessage" : "", 
+			"required" : "Please make a selection", 
+			"showTitle" : false,
+			"listItem":"stateList" ,
+			"focus": false
+		},
+		{ 
+			"id": 79, 
+			"name":"ownerZip",
+			"type": "text",
+			"title" : "What is your zip code?", 
+			"placeholder" : "Zip", 
+			"errormessage" : "Invalid zip code", 
+			"required" : "Please enter Zip", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 19, 
+			"name":"ownerAddress",
+			"type" : "group",
+			"title" : "Owner X’s Address",
+			"subquestions": [75,76,77,78,79]
+		},
+		{ 
+			"id": 21, 
+			"name" : "multipleOwnership",
+			"type" : "button",
+			"title" : "We now need to gather some information on each of the owners of your business who have greater than {{X}}% ownership in the business.",
+			"description": "Do you have any owners with a {{X}}% or greater stake in the business?",
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"YesNoButtonList",
+			"focus": true
+		},
+		{ 
+			"id": 71, 
+			"name":"ownerFirstName",
+			"type": "text",
+			"title" : "Owner {{X}}’s Name", 
+			"placeholder" : "First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Owner's First Name", 
+			"showTitle" : false,
+			"focus": true
+        },
+        { 
+			"id": 72, 
+			"name":"ownerLastName",
+			"type": "text",
+			"title" : "Last Name", 
+			"placeholder" : "Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter Owner's Last Name", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 22, 
+			"name":"ownerContact",
+			"type": "group",
+			"title": "What is the name of Owner {{X}}?",
+			"subquestions": [71,72]
+		}, 
+		{ 
+			"id": 23, 
+			"name":"ownerEmail",
+			"type": "text",
+			"title" : "Owner {{X}}’s Email Address", 
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid owner email address", 
+			"required" : "Please enter a valid owner email address", 
+			"showTitle" : true,
+			"focus": true
+		},{ 
+			"id": 24, 
+			"name":"percentOwnership",
+			"type": "text",
+			"title" : "Percentage of the Business owned by Owner {{X}}?", 
+			"placeholder" : "%", 
+			"errormessage" : "Please enter Ownership Percentage between {{X}} and 100", 
+			"required" : "Total Ownership Percentage cannot exceed 100%", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 25, 
+			"name" : "additionalOwner",
+			"type" : "button",
+			"title" : "Are there any other owners who have a {{X}}% or greater stake in the business?", 
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"YesNoButtonList",
+			"focus": true
+		},{ 
+			"id": 26, 
+			"name":"consentHardpulEnquiry",
+			"type": "label",
+			"title" : "Consent for Hardpull Enquiry", 
+			"description": "We are now going to send your details to credit reference and fraud checking agencies. This will not affect your credit score, and will allow us to determine whether you will be eligible for a loan.",
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"focus": true,
+			"showConsent" :true
+		},
+		{ 
+			"id": 27, 
+			"name":"businessLineofCredit",
+			"type": "loan-button", 
+			"title": "What is the purpose of your business loan?",
+			"errormessage" : "", 
+			"required" : "Please check at least one Loan Type",
+			"showTitle" : false,
+			"focus": true,
+			"defaultChecked": true,
+			"listItem":"loanTypelist" ,
+			"col" : 6
+		},{ 
+			"id": 151, 
+			"name":"ownerSSN" ,
+			"type": "masked-ssn",
+			"title" : "Your Social Security Number", 
+			"placeholder" : "SSN (xxx-xx-xxxx)",  
+			"errormessage" : "Please enter valid SSN",
+			"required" : "Please enter valid SSN", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 152, 
+			"name" : "CoOwnerStart",
+			"type" : "label",
+			"title": "",
+			"description" : "", 
+			"placeholder" : "", 
+			"text": "Continue",
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"focus": true
+        }
+		],
+        "versions" : [
+            { 
+				"versionNumber" : "default",
+				"questions" : {
+					"borrower":   [27,1,4,2,3,5,6,7,8,9,10,11,12,13,14,15,17,18,19,16,20,21,22,23,24,25,26],
+					"coborrower": [152,151,17,18,19],
+					"extended": [ ]
+				}				 		        
+            }		 
+        ]
+}

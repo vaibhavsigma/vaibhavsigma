@@ -1,0 +1,661 @@
+{
+    "questions": [
+		{ 
+			"id": 51, 
+			"name":"loanAmount", 
+			"type": "text",
+			"title" : "Your Loan Information", 
+			"placeholder" : "£0 (Loan Amount)", 
+			"errormessage" : "", 
+			"errormessagecode" : "Enter an amount between ", 
+			"required" : "Please Enter a loan Amount", 
+			"showTitle" : false,
+			"focus": true,
+			"col": 6
+        },
+		{ 
+			"id": 52, 
+			"name":"loanTerm", 
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Loan Term (Months)", 
+			"errormessage" : "", 
+			"errormessagecode" : "Enter a Loan term between 12 to 96 ", 
+			"required" : "Please Enter Loan Term", 
+			"showTitle" : true,
+			"focus": false,
+			"col": 6
+        },
+		{ 
+			"id": 53, 
+			"name" : "loanPurpose",
+			"type" : "dropdown",
+			"title" : "", 
+			"placeholder" : "Select a loan purpose", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"loanPurposeList1",
+			"focus": false
+        },
+		{ 
+			"id": 1, 
+			"name":"loanInfo",
+			"type" : "group",
+			"subquestions": [51,52,53]
+		},
+		{ 
+			"id": 54, 
+			"name":"firstName",
+			"type": "text",
+			"title" : "Your Name and Date of Birth", 
+			"placeholder" : "First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter your first name.", 
+			"showTitle" : false,
+			"focus": true
+        },
+        { 
+			"id": 55, 
+			"name":"lastName",
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter your last name.", 
+			"showTitle" : false,
+			"focus": false
+		},{ 
+			"id": 56, 
+			"name":"dateOfBirth",
+			"type": "masked-text",
+			"title" : "", 
+			"placeholder" : "DD/MM/YYYY (Birth Date)", 
+			"errormessage" : "Borrower must be at least 18 years old.", 
+			"required" : "Please enter Birthdate", 
+			"showTitle" : true,
+			"focus": false
+        },{ 
+			"id": 2, 
+			"name":"PersonalDetails",
+			"type": "group",
+			"subquestions": [54,55,56]
+		},
+		{ 
+			"id": 57, 
+			"name":"address1" , 
+			"type": "text",
+			"title" : "Your Residence Address", 
+			"placeholder" : "Street address", 
+			"errormessage" : "Only 50 characters is allowed.", 
+			"required" : "Please enter Street Address", 
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 58, 
+			"name":"address2" ,
+			"type": "text",
+			"title" : "Apartment", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 20 characters is allowed.", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 59, 
+			"name":"city" ,
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "City", 
+			"errormessage" : "Invalid city for selected County", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 60, 
+			"name":"state",
+			"type" : "text",
+			"title" : "County",  
+			"placeholder" : "County", 
+			"errormessage" : "Invalid County", 
+			"required" : "Please enter a County.", 
+			"showTitle" : false,
+			"listItem":"stateList",
+			"focus": false
+		},
+		{ 
+			"id": 61, 
+			"name":"zipCode",
+			"type": "text",
+			"title" : "What is your Postcode?", 
+			"placeholder" : "Postcode", 
+			"errormessage" : "Invalid Postcode.", 
+			"required" : "Please enter Postcode", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 3, 
+			"name":"address",
+			"title": "Your Residence Address",
+			"type" : "group",
+			"subquestions": [57,58,59,60,61]
+		},  { 
+			"id": 4, 
+			"name":"employmentStatus",
+			"type": "button",
+			"title" : "Employment Status", 
+			"placeholder" : "Employment", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"employmentList",
+			"focus": true
+        },
+		{ 
+			"id": 5, 
+			"name":"annualIncome",
+			"type": "text",
+			"title" : "Annual Income", 
+			"placeholder" : "£0", 
+			"errormessage" : "", 
+			"errormessagecode" : "Insufficient Annual Income",
+			"required" : "Please enter Annual Income", 
+			"showTitle" : true,
+			"focus": true
+        },
+		{ 
+			"id": 6, 
+			"name":"housingStatus",
+			"type": "button",
+			"title" : "Residential Status", 
+			"placeholder" : "Residential Status", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"housingList",
+			"focus": true
+		},
+		{ 
+			"id": 7, 
+			"name":"housingPayment",
+			"type": "text",
+			"title" : "Monthly Mortgage / Rent Payment", 
+			"placeholder" : "£0", 
+			"errormessage" : "Invalid Payment.", 
+			"required" : "Please enter Monthly Mortgage / Rent Payment.", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 8, 
+			"name":"numberOfDependents",
+			"type": "text",
+			"title" : "Number Of Dependents", 
+			"placeholder" : "Number of dependents", 
+			"errormessage" : "Max 15 dependents allowed", 
+			"required" : "Please enter Number of dependents.", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 9, 
+			"name":"ownVehicle",
+			"type": "button",
+			"title" : "Do you own a Vehicle?", 
+			"placeholder" : "ownVehicle", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"YesNoButtonList",
+			"focus": true
+		},
+		{ 
+			"id": 62, 
+			"name":"travelMonthlySpend",
+			"type": "text",
+			"title" : "Monthly spend on:", 
+			"placeholder" : "Travel (£)", 
+			"errormessage" : "Enter valid travel MonthlySpend.", 
+			"required" : "Please enter travel MonthlySpend.", 
+			"showTitle" : false,
+			"focus": true
+		},
+		{ 
+			"id": 63, 
+			"name":"phoneMonthlySpend",
+			"type": "text",
+			"title" : "Phone(£)", 
+			"placeholder" : "Phone (£)", 
+			"errormessage" : "Enter valid phone MonthlySpend.", 
+			"required" : "Please enter phone MonthlySpend.", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 64, 
+			"name":"housekeepingMonthlySpend",
+			"type": "text",
+			"title" : "Housekeeping(£)", 
+			"placeholder" : "Housekeeping (£)", 
+			"errormessage" : "Enter valid housekeeping MonthlySpend.", 
+			"required" : "Please enter housekeeping MonthlySpend.", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 65, 
+			"name":"utilitiesMonthlySpend",
+			"type": "text",
+			"title" : "Utilities(£)", 
+			"placeholder" : "Utilities (£)", 
+			"errormessage" : "Enter valid utilities MonthlySpend .", 
+			"required" : "Please enter utilities MonthlySpend.", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 66, 
+			"name":"creditAgreementsMonthlySpend",
+			"type": "text",
+			"title" : "Credit Agreements (£)", 
+			"placeholder" : "Credit Agreements (£)", 
+			"errormessage" : "Enter valid Credit.", 
+			"required" : "Please enter Credit.", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 67, 
+			"name":"otherMonthlySpend",
+			"type": "text",
+			"title" : "Other (£)", 
+			"placeholder" : "Other (£)", 
+			"errormessage" : "Enter valid Number", 
+			"required" : "Please enter Other MonthlySpend", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 68, 
+			"name":"hr",
+			"type": "label",
+			"title" : "", 
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},{ 
+			"id": 69, 
+			"name":"totalExpense",
+			"type": "label",
+			"title" : "Total declared monthly expenses:", 
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},
+		{ 
+			"id": 70, 
+			"name":"totalValue",
+			"type": "label",
+			"title" : "£{{X}}", 
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false
+		},{ 
+			"id": 10, 
+			"name":"monthlySpend",
+			"title": "Your Monthly Spend",
+			"type" : "group",
+			"subquestions": [62,63,64,65,66,67,68,69,70]
+		},
+		{ 
+			"id": 11, 
+			"name":"emailAddress",
+			"type": "text",
+			"title" : "Email Address", 
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid email address.", 
+			"required" : "Please enter a valid email address.", 
+			"showTitle" : true,
+			"focus": true
+		},
+		{ 
+			"id": 12, 
+			"name":"phoneNumber",
+			"type": "masked-text",
+			"title" : "Phone Number", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"errormessage" : "Invalid Phone number.", 
+			"required" : "Please enter Phone number", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6
+		},
+		{ 
+			"id": 13, 
+			"name":"SSN",
+			"type": "label",
+			"title" : "Consent for Soft Enquiry", 
+			"description": "We are now going to send your details to credit reference and fraud checking agencies. This will not affect your credit score, and will allow us to determine whether you will be eligible for a loan.",
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"focus": true,
+			"showConsent" :true
+        },
+		{
+			"id": 14, 
+			"name":"additionalBorrower",
+			"type": "button",
+			"title" : "Would you like to add an additional borrower?", 
+			"placeholder" : "CoBorrower", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"listItem":"AddCoborrower",
+			"focus": true
+			},	
+			{ 
+				"id": 151, 
+				"name":"firstName",
+				"type": "text",
+				"title" : "Co-Borrower Name", 
+				"placeholder" : "First Name", 
+				"errormessage" : "", 
+				"required" : "Please enter your first name.", 
+				"showTitle" : false,
+				"focus": true
+			},
+			{ 
+				"id": 152, 
+				"name":"lastName",
+				"type": "text",
+				"title" : "", 
+				"placeholder" : "Last Name", 
+				"errormessage" : "", 
+				"required" : "Please enter your last name.", 
+				"showTitle" : false,
+				"focus": false
+			},{ 
+				"id": 153, 
+				"name":"dateOfBirth",
+				"type": "masked-text",
+				"title" : "When was co-borrower born?", 
+				"placeholder" : "DD/MM/YYYY (Birth Date)", 
+				"errormessage" : "Co-Borrower must be at least 18 years old.", 
+				"required" : "Please enter Birthdate", 
+				"showTitle" : true,
+				"focus": true
+			},{ 
+				"id": 103, 
+				"name":"PersonalDetails",
+				"type": "group",
+				"subquestions": [151,152,153]
+			},
+			{ 
+				"id": 154, 
+				"name":"address1" , 
+				"type": "text",
+				"title" : "Co-Borrower's Residence Address", 
+				"placeholder" : "Street address", 
+				"errormessage" : "Only 50 characters is allowed.", 
+				"required" : "Please enter Street Address", 
+				"showTitle" : false,
+				"focus": true
+			},
+			{ 
+				"id": 155, 
+				"name":"address2" ,
+				"type": "text",
+				"title" : "Apartment", 
+				"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+				"errormessage" : "Only 20 characters is allowed.", 
+				"required" : "", 
+				"showTitle" : false,
+				"focus": false
+			},
+			{ 
+				"id": 156, 
+				"name":"city" ,
+				"type": "text",
+				"title" : "City", 
+				"placeholder" : "City", 
+				"errormessage" : "Invalid city for selected state", 
+				"required" : "Please enter City", 
+				"showTitle" : false,
+				"focus": false
+			},
+			{ 
+				"id": 157, 
+				"name":"state",
+				"type" : "text",
+				"title" : "County",  
+				"placeholder" : "County", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : false,
+				"listItem":"stateList" ,
+				"focus": false
+			},
+			{ 
+				"id": 158, 
+				"name":"zipCode",
+				"type": "text",
+				"title" : "What is your Postcode?", 
+				"placeholder" : "Postcode", 
+				"errormessage" : "Invalid Postcode.", 
+				"required" : "Please enter Postcode", 
+				"showTitle" : false,
+				"focus": false
+			},
+			{ 
+				"id": 104, 
+				"name":"address",
+				"title": "Your Residence Address",
+				"type" : "group",
+				"subquestions": [154,155,156,157,158]
+			},  { 
+				"id": 105, 
+				"name":"employmentStatus",
+				"type": "button",
+				"title" : "Co-Borrower: Employment Status", 
+				"placeholder" : "Employment", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : true,
+				"listItem":"employmentList",
+				"focus": true
+			},
+			{ 
+				"id": 106, 
+				"name":"annualIncome",
+				"type": "text",
+				"title" : "Co-Borrower: Annual Income", 
+				"placeholder" : "£0", 
+				"errormessage" : "", 
+				"errormessagecode" : "Insufficient Annual Income",
+				"required" : "Please enter Annual Income", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 107, 
+				"name":"housingStatus",
+				"type": "button",
+				"title" : "Co-Borrower: Residential Status", 
+				"placeholder" : "Residential Status", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : true,
+				"listItem":"housingList",
+				"focus": true
+			},
+			{ 
+				"id": 108, 
+				"name":"housingPayment",
+				"type": "text",
+				"title" : "Co-Borrower: Monthly Mortgage / Rent Payment", 
+				"placeholder" : "£0", 
+				"errormessage" : "Invalid Payment.", 
+				"required" : "Please enter Monthly Mortgage / Rent Payment.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 109, 
+				"name":"numberOfDependents",
+				"type": "text",
+				"title" : "Co-Borrower: Number of dependents", 
+				"placeholder" : "Number of dependents", 
+				"errormessage" : "Enter valid Number of dependents.", 
+				"required" : "Please enter Number of dependents.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 110, 
+				"name":"ownVehicle",
+				"type": "button",
+				"title" : "Co-Borrower: Do you own a Vehicle?", 
+				"placeholder" : "ownVehicle", 
+				"errormessage" : "Please make a selection", 
+				"required" : "Please make a selection", 
+				"showTitle" : true,
+				"listItem":"YesNoButtonList",
+				"focus": true
+			},
+			{ 
+				"id": 159, 
+				"name":"travelMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Travel(£)", 
+				"placeholder" : "Travel(£)", 
+				"errormessage" : "Enter valid travel MonthlySpend.", 
+				"required" : "Please enter travel MonthlySpend.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 160, 
+				"name":"phoneMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Phone(£)", 
+				"placeholder" : "Phone(£)", 
+				"errormessage" : "Enter valid phone MonthlySpend.", 
+				"required" : "Please enter phone MonthlySpend.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 161, 
+				"name":"housekeepingMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Housekeeping(£)", 
+				"placeholder" : "Housekeeping(£)", 
+				"errormessage" : "Enter valid housekeeping MonthlySpend.", 
+				"required" : "Please enter housekeeping MonthlySpend.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 162, 
+				"name":"utilitiesMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Utilities(£)", 
+				"placeholder" : "Utilities(£)", 
+				"errormessage" : "Enter valid utilities MonthlySpend .", 
+				"required" : "Please enter utilities MonthlySpend.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 163, 
+				"name":"creditAgreementsMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Credit Agreements (£)", 
+				"placeholder" : "Credit Agreements (£)", 
+				"errormessage" : "Enter valid Credit.", 
+				"required" : "Please enter Credit.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 164, 
+				"name":"otherMonthlySpend",
+				"type": "text",
+				"title" : "Co-Borrower: Other (£)", 
+				"placeholder" : "Other (£)", 
+				"errormessage" : "Enter valid Number", 
+				"required" : "Please enter Other MonthlySpend", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 165, 
+				"name":"totalExpense",
+				"type": "text",
+				"title" : "Co-Borrower: Show total declared monthly expenses (£)", 
+				"placeholder" : "total Expense", 
+				"errormessage" : "", 
+				"required" : "Please enter totalExpense", 
+				"showTitle" : true,
+				"focus": true
+			},{ 
+				"id": 111, 
+				"name":"monthlySpend",
+				"title": "Your Monthly Spend",
+				"type" : "group",
+				"subquestions": [159,160,161,162,163,164,165]
+			},
+			{ 
+				"id": 112, 
+				"name":"emailAddress",
+				"type": "text",
+				"title" : "Co-Borrower: Email Address", 
+				"placeholder" : "Email Address", 
+				"errormessage" : "Please enter a valid email address.", 
+				"required" : "Please enter a valid email address.", 
+				"showTitle" : true,
+				"focus": true
+			},
+			{ 
+				"id": 113, 
+				"name":"phoneNumber",
+				"type": "masked-text",
+				"title" : "Co-Borrower: Phone Number", 
+				"placeholder" : "(xxx) xxx-xxxx", 
+				"errormessage" : "Invalid Phone number.", 
+				"required" : "Please enter Phone number", 
+				"showTitle" : true,
+				"focus": true,
+				"col" : 6
+			} 
+	],
+        "versions" : [
+            { 
+                "versionNumber" : "default",
+				"questions" : {
+					"borrower": [1,2,3,4,5,6,7,8,9,10,11,12,13],
+					"coborrower": [103,104,105,106,107,108,109,110,111,112,113],
+					"extended": [ 39, 40 ]
+				}          
+            },  
+            { 
+				"versionNumber" : "1",
+				"questions" : {
+					"borrower": [12,13,16,17,18,19,1,2,8,9,20,10,11],
+					"extended": [ 39 ]
+				}                   
+            }		 
+        ]
+}

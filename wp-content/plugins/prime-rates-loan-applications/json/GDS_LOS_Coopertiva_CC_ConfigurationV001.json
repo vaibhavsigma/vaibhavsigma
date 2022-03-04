@@ -1,0 +1,361 @@
+{
+
+	"lenderInfo": [{
+			"lender": "SoFi",
+			"partnerId": "1",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/SoFi.png",
+			"noFees": true
+		}, {
+			"lender": "Marlette",
+			"partnerId": "2",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/BestEgg.png",
+			"noFees": false
+		}, {
+			"lender": "Upgrade",
+			"partnerId": "4",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/Upgrade.png",
+			"noFees": false
+		}, {
+			"lender": "LendingPoint",
+			"partnerId": "6",
+			"featured": 0,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/LendingPoint.png",
+			"noFees": false
+		}, {
+			"lender": "Payoff",
+			"partnerId": "7",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/Payoff.png",
+			"noFees": false
+		}, {
+			"lender": "OneMain",
+			"partnerId": "12",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/OMF.png",
+			"noFees": false
+		}, {
+			"lender": "Prosper",
+			"partnerId": "8",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/Prosper.png",
+			"noFees": false
+		}, {
+			"lender": "CreditSoup",
+			"partnerId": "",
+			"featured": 1,
+			"lenderLogo": "/wp-content/uploads/2018/06/CreditSoup_Logo-HR_160x36.png",
+			"noFees": false
+		}, {
+			"lender": "Freedom",
+			"partnerId": "13",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/FreedomPlus.png",
+			"noFees": false
+		}, {
+			"lender": "Lightstream",
+			"partnerId": "14",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/LightStream.png",
+			"noFees": true
+		}, {
+			"lender": "Marcus",
+			"partnerId": "15",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/pr-flat-responsive-pro-child/images/Lender_Logo_300x100/Marcus.png",
+			"noFees": true
+		}, {
+			"lender": "GDSLink",
+			"partnerId": "16",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/prime-rates-gdsbank/images/gds-link-logo.png",
+			"noFees": true
+		}, {
+			"lender": "Woodforest",
+			"partnerId": "17",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/prime-rates-woodforest/images/headerlogo.png",
+			"noFees": true
+		}, {
+			"lender": "ABCBank",
+			"partnerId": "18",
+			"featured": 1,
+			"lenderLogo": "/wp-content/themes/prime-rates-abcbank/images/abcbank.png",
+			"noFees": true
+		}
+	],
+	"redirectUrl": "/redirect",
+	"primeRateLogo": "/wp-content/themes/prime-rates-gdsbank/images/gds-link-logo.png",
+	"lockImage": "",
+	"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+	"safariloadImage": "/wp-content/uploads/2017/11/PrimeRates_Icon-e1519478817531.jpg",
+	"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+	"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+	"ZaleaLogo": "/wp-content/themes/prime-rates-zalea/images/Zalea-Logo.png",
+	"ZaleaTheme": "Zalea",
+	"headWayLogo": "/wp-content/themes/prime-rates-head-way-sales/images/acorn-finance-logo.png",
+	"HeadWayTheme": "Acorn Finance",
+	"PrimeRateTheme": "MoneyFacts",
+	"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+	"intercomRedirectUrl": "https://prates.ltroute.com/click.track?CID=418430&AFID=425729",
+	"spinnerGIF": "/wp-content/themes/pr-flat-responsive-pro-child/images/preloader1.gif",
+	"BusinessFunding": "https://prates.ltroute.com/click.track?CID=420569&AFID=421367",
+	"redirectGDSUrl": "/create-borrower",
+	"coBorrowerBreadcrumb": "/los-application/app-page-1",
+	"coBorrowerHaderText": "(Co-Borrower included in application)",
+	"consentText": "<p class='CBformlist2'>I consent to <b>GDS Link</b> conducting a hard credit pull.</p>",
+	"themeName" : "GDSLink",
+	"offerSubmitCount" : 1,
+	"themeUri" : "/gds-link/credit-cards",
+	"termsOfUseUrl" : "/gds-link/credit-cards/terms-of-use",
+	"privacyPolicyUrl" : "/gds-link/credit-cards/privacy-policy",
+	"domains": [
+		{
+			"hosts": [
+				{
+					"host":"ppp-dev.api-dataview360.com",
+					"plaid_url":"https://ppp-dev.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"ppp-qa.api-dataview360.com",
+					"plaid_url":"https://ppp-qa.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"ppp-demo.api-dataview360.com",
+					"plaid_url":"https://ppp-demo.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"bt-dev.api-dataview360.com",
+					"plaid_url":"https://bt-dev.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"bt-qa.api-dataview360.com",
+					"plaid_url":"https://bt-qa.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"bt-demo.api-dataview360.com",
+					"plaid_url":"https://bt-demo.api-dataview360.com/plaid.html"
+				}
+			],
+			"slug": "gdsppp",
+			"theme": "prime-rates-gdsbank",
+			"theme_name": "GDSLink",
+			"logo": "/wp-content/themes/prime-rates-gdsbank/images/gds-link-logo.png",
+			"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+			"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+			"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+			"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+			"breadcrumb_css": "BCStyles-gdsbank.css",
+			"leadcheck_css": "leadcheck-gdsbank.css",
+			"leadcheck_transition_css": "transition-gdsbank.css",
+			"breadcrumb_transition_css": "transition-gdsbank.css",
+			"offer_css": "offer-gdsbank-style.css",
+			"lenderoffer_css": "lenderoffers-gdsbank-style.css",
+			"document_text": "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.<br><br>Please upload your documents using the inputs below.",
+			"bank_text_top": "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S. Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed.",
+			"bank_text_bottom": "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below (this will require a manual review of your bank account and could delay your funds).",
+			"document_thank_you": "We will get back to you once we verify your details. Thank You!",
+			"login_header": "Great choice!",
+			"login_header_bottom": "Let's create your account.",
+			"login_tooltip": "Please enter a password that meets the following requirements:  - At least 8 characters long, - At least 1 capital letter, - At least 1 number, - At least 1 special character (!@#$%^&*).",
+			"TILA_page": "<h3 style='font-weight:500;text-align:center;'>You're almost finished! </h3><h4 class='paragraph-heading'>We need your signature and initials on the application form that we have created on your behalf. If Addendum A and/or Addendum B are applicable to your business, you will have the opportunity to upload them later in this process.</h4><h4 class='paragraph-heading'>For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transferred to Docusign. Once there, simply click the yellow start button and sign and initial as prompted. When you are finished, you will be returned here.</h4>",
+			"coBorrowerHaderText": "(Co-Borrower included in application)",
+			"consentText": "<p class='CBformlist2'>I consent to <b>GDS Link</b> conducting a hard credit pull.</p>"
+		},
+		{
+			"hosts": [
+				{
+					"host":"los-dev-uk.api-dataview360.com",
+					"plaid_url":"https://los-dev-uk.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"los-qa-uk.api-dataview360.com",
+					"plaid_url":"https://los-qa-uk.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"los-demo-uk.api-dataview360.com",
+					"plaid_url":"https://los-demo-uk.api-dataview360.com/plaid.html"
+				}
+			],
+			"slug": "gdsppp",
+			"theme": "prime-rates-gdsbank-uk",
+			"theme_name": "GDSLink UK",
+			"logo": "/wp-content/themes/prime-rates-gdsbank/images/gds-link-logo.png",
+			"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+			"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+			"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+			"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+			"breadcrumb_css": "BCStyles-gdsbank-uk.css",
+			"leadcheck_css": "leadcheck-gdsbank.css",
+			"leadcheck_transition_css": "transition-gdsbank.css",
+			"breadcrumb_transition_css": "transition-gdsbank.css",
+			"offer_css": "offer-gdsbank-style.css",
+			"lenderoffer_css": "lenderoffers-gdsbank-style.css",
+			"document_text": "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.<br><br>Please upload your documents using the inputs below.",
+			"bank_text_top": "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S. Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed.",
+			"bank_text_bottom": "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below (this will require a manual review of your bank account and could delay your funds).",
+			"document_thank_you": "We will get back to you once we verify your details. Thank You!",
+			"login_header": "Great choice!",
+			"login_header_bottom": "Let's create your account.",
+			"login_tooltip": "Please enter a password that meets the following requirements:  - At least 8 characters long, - At least 1 capital letter, - At least 1 number, - At least 1 special character (!@#$%^&*).",
+			"TILA_page": "<h3 style='font-weight:500;text-align:center;'>You're almost finished! </h3><h4 class='paragraph-heading'>We need your signature and initials on the application form that we have created on your behalf. If Addendum A and/or Addendum B are applicable to your business, you will have the opportunity to upload them later in this process.</h4><h4 class='paragraph-heading'>For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transferred to Docusign. Once there, simply click the yellow start button and sign and initial as prompted. When you are finished, you will be returned here.</h4>",
+			"coBorrowerHaderText": "(Co-Borrower included in application)",
+			"consentText": "<p class='CBformlist2'>I consent to <b>GDS Link</b> conducting a hard credit pull.</p>"
+		},
+		{
+			"hosts": [
+				{
+					"host":"los-dev.api-dataview360.com"
+				},
+				{
+					"host":"los-qa.api-dataview360.com"
+				},
+				{
+					"host":"los-demo.api-dataview360.com"
+				}
+			],
+			"slug": "gdsppp",
+			"theme": "prime-rates-gdsbank",
+			"theme_name": "GDSLink",
+			"logo": "/wp-content/themes/prime-rates-gdsbank/images/gds-link-logo.png",
+			"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+			"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+			"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+			"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+			"breadcrumb_css": "BCStyles-gdsbank.css",
+			"leadcheck_css": "leadcheck-gdsbank.css",
+			"leadcheck_transition_css": "transition-gdsbank.css",
+			"breadcrumb_transition_css": "transition-gdsbank.css",
+			"offer_css": "offer-gdsbank-style.css",
+			"lenderoffer_css": "lenderoffers-gdsbank-style.css",
+			"plaid": [
+				{
+					"host":"los-dev.api-dataview360.com",
+					"url":"https://los-dev.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"los-qa.api-dataview360.com",
+					"url":"https://los-qa.api-dataview360.com/plaid.html"
+				},
+				{
+					"host":"los-demo.api-dataview360.com",
+					"url":"https://los-demo.api-dataview360.com/plaid.html"
+				}
+			],
+			"document_text": "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.<br><br>Please upload your documents using the inputs below.",
+			"bank_text_top": "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S. Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed.",
+			"bank_text_bottom": "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below (this will require a manual review of your bank account and could delay your funds).",
+			"document_thank_you": "We will get back to you once we verify your details. Thank You!",
+			"login_header": "Great choice!",
+			"login_header_bottom": "Let's create your account.",
+			"login_tooltip": "Please enter a password that meets the following requirements:  - At least 8 characters long, - At least 1 capital letter, - At least 1 number, - At least 1 special character (!@#$%^&*).",
+			"TILA_page": "<h3 style='font-weight:500;text-align:center;'>You're almost finished! </h3><h4 class='paragraph-heading'>For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transferred to Docusign. Once there, simply click the yellow start button and sign and initial as prompted. When you are finished, you will be returned here.</h4>",
+			"coBorrowerHaderText": "(Co-Borrower included in application)",
+			"consentText": "<p class='CBformlist2'>I consent to <b>GDS Link</b> conducting a hard credit pull.</p>"
+		},
+		{
+			"hosts": [
+				{
+					"host":"dev.woodforest.primerates.com"
+				},
+				{
+					"host":"qa.woodforest.primerates.com"
+				},
+				{
+					"host":"demo.woodforest.primerates.com"
+				}
+			],
+			"slug": "woodforest",
+			"theme": "prime-rates-woodforest",
+			"theme_name": "Woodforest",
+			"logo": "/wp-content/themes/prime-rates-woodforest/images/headerlogo.png",
+			"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+			"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+			"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+			"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+			"breadcrumb_css": "BCStyles-woodforest.css",
+			"leadcheck_css": "leadcheck-woodforest.css",
+			"leadcheck_transition_css": "transition-woodforest.css",
+			"breadcrumb_transition_css": "transition-woodforest.css",
+			"offer_css": "offer-woodforest-style.css",
+			"lenderoffer_css": "lenderoffers-woodforest-style.css",
+			"plaid": [
+				{
+					"host":"dev.woodforest.primerates.com",
+					"url":"https://dev.woodforest.primerates.com/plaid.html"
+				},
+				{
+					"host":"qa.woodforest.primerates.com",
+					"url":"https://qa.woodforest.primerates.com/plaid.html"
+				},
+				{
+					"host":"demo.woodforest.primerates.com",
+					"url":"https://demo.woodforest.primerates.com/plaid.html"
+				}
+			],
+			"document_text": "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.<br><br>Please upload your documents using the inputs below.",
+			"bank_text_top": "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S. Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed.",
+			"bank_text_bottom": "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below (this will require a manual review of your bank account and could delay your funds).",
+			"document_thank_you": "We will get back to you once we verify your details. Thank You!",
+			"login_header": "Great choice!",
+			"login_header_bottom": "Let's create your account.",
+			"login_tooltip": "Please enter a password that meets the following requirements:  - At least 8 characters long, - At least 1 capital letter, - At least 1 number, - At least 1 special character (!@#$%^&*).",
+			"TILA_page": "<h3 style='font-weight:500;text-align:center;'>You're almost finished! </h3><h4 class='paragraph-heading'>We just need your signature and initials on a couple of documents and we'll get your funds to you. </h4><h4 class='paragraph-heading'>For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transferred to Docusign. Once there, simply click the yellow start button and sign and initial as prompted. When you are finished, you will be returned here.</h4>",
+			"coBorrowerHaderText": "(Co-Borrower included in application)",
+			"consentText": "<p class='CBformlist2'>I consent to <b>Woodforest</b> conducting a hard credit pull.</p>"
+		},
+		{
+			"hosts": [
+				{
+					"host":"dev.abcbank.primerates.com"
+				},
+				{
+					"host":"qa.abcbank.primerates.com"
+				},
+				{
+					"host":"demo.abcbank.primerates.com"
+				}
+			],
+			"slug": "abcbank",
+			"theme": "prime-rates-abcbank",
+			"theme_name": "ABCBank",
+			"logo": "/wp-content/themes/prime-rates-abcbank/images/abcbank.png",
+			"emailSendEndpoint": "/wp-admin/admin-ajax.php",
+			"googleAPIKey": "AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+			"phoneNumberAPIKey": "86c97b1559bd320f30967010f3150b2b",
+			"loadImage": "/wp-content/plugins/primerate-redirection/images/PrimeRates_Icon.jpg",
+			"breadcrumb_css": "BCStyles-abcbank.css",
+			"leadcheck_css": "leadcheck-abcbank.css",
+			"leadcheck_transition_css": "transition-abcbank.css",
+			"breadcrumb_transition_css": "transition-abcbank.css",
+			"offer_css": "offer-abcbank-style.css",
+			"lenderoffer_css": "lenderoffers-abcbank-style.css",
+			"plaid": [
+				{
+					"host":"dev.abcbank.primerates.com",
+					"url":"https://dev.abcbank.primerates.com/plaid.html"
+				},
+				{
+					"host":"qa.abcbank.primerates.com",
+					"url":"https://qa.abcbank.primerates.com/plaid.html"
+				},
+				{
+					"host":"demo.abcbank.primerates.com",
+					"url":"https://demo.abcbank.primerates.com/plaid.html"
+				}
+			],
+			"document_text": "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.<br><br>Please upload your documents using the inputs below.",
+			"bank_text_top": "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S. Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed.",
+			"bank_text_bottom": "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below (this will require a manual review of your bank account and could delay your funds).",
+			"document_thank_you": "We will get back to you once we verify your details. Thank You!",
+			"login_header": "Great choice!",
+			"login_header_bottom": "Let's create your account.",
+			"login_tooltip": "Please enter a password that meets the following requirements:  - At least 8 characters long, - At least 1 capital letter, - At least 1 number, - At least 1 special character (!@#$%^&*).",
+			"TILA_page": "<h3 style='font-weight:500;text-align:center;'>You're almost finished! </h3><h4 class='paragraph-heading'>We just need your signature and initials on a couple of documents and we'll get your funds to you. </h4><h4 class='paragraph-heading'>For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transferred to Docusign. Once there, simply click the yellow start button and sign and initial as prompted. When you are finished, you will be returned here.</h4>",
+			"coBorrowerHaderText": "(Co-Borrower included in application)",
+			"consentText": "<p class='CBformlist2'>I consent to <b>ABC Bank</b> conducting a hard credit pull.</p>"
+		}
+	]
+}

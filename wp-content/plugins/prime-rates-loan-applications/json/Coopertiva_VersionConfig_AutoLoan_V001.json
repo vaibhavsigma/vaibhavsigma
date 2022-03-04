@@ -1,0 +1,3263 @@
+{
+	"summaryPageSections": [	
+		{ "name" : "LoanInformation", "title" : "Loan Information", "cssClass" : "summaryPage-leftalign summaryPage-border", "isVisible" : true,"postData":"borrowers[0].offerData"},
+		{ "name" : "PrimaryBorrower", "title" : "Primary Borrower Information", "cssClass" : "summaryPage-leftalign summaryPage-border summaryPage-border-bottom-none", "isVisible" : true,"postData":"borrowers[0]"},
+		{ "name" : "EmploymentInformation", "title" : "Employment Information", "cssClass" : "summaryPage-leftalign summaryPage-border employmentText summaryPage-border-top-none ", "isVisible" : true,"postData":"borrowers[0].employmentInformation[0]"},
+		{ "name" : "CoBorrower", "title" : "Co-Borrower Information", "cssClass" : "summaryPage-leftalign summaryPage-border", "isVisible" :true,"postData":"borrowers[1]"}
+	],
+	"rules": [
+		{"field": "StartDate", "compareField" : "DateOfBirth", "source":"State", "type":"Date", "operator":">","threshhold":"10" ,"thresholdType":"Year","customMessage":"Start date is not valid. Please enter proper start date." },
+		{"field": "EndDate", "compareField" : "StartDate" ,"source":"State", "type":"Date", "operator":">","threshhold":"0" ,"thresholdType":"Date","customMessage":"End date should not be less than start date." }
+	],
+	"conditionalrules": [
+		{"ruleson": "onInit","field": "BankStatement", "compareField" : "BankLinking", "source":"State", "type":"question", "operator":"!=","threshhold":"null" ,"thresholdType":"Value","customMessage":"","actionType":"css", "action":"display-none"},
+		{"ruleson": "onInit","field": "PurchaseVehicleVIN", "compareField" : "loanSubPurpose", "source":"postData-borrower", "type":"question", "operator":"==","threshhold":"Used" ,"thresholdType":"Value","customMessage":"","actionType":"css", "action":"display-none"},	
+		{"ruleson": "onInit","field": "TradingVehicleVIN", "compareField" : "tradingInVehicle", "source":"postData-borrower", "type":"question", "operator":"==","threshhold":"Yes" ,"thresholdType":"Value","customMessage":"","actionType":"css", "action":"display-none"},	
+		{"ruleson": "onInit","field": "YourMostRecentTaxReturns", "compareField" : "employmentStatus", "source":"postData-borrower", "type":"question", "operator":"==","threshhold":"SELF_EMPLOYED" ,"thresholdType":"Value","customMessage":"","actionType":"css", "action":"display-none"},		
+		{"ruleson": "onInit","field": "YourMostRecentPayStub", "compareField" : "employmentStatus", "source":"postData-borrower", "type":"question", "operator":"==","threshhold":"FULL_TIME,PART_TIME" ,"thresholdType":"Value","customMessage":"","actionType":"css", "action":"display-none"},	
+		{"ruleson": "onContinue","field": "documentListInfo", "compareField" : "documentListInfo", "source":"State", "type":"equal", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"nextpage", "action":"proofofResidence"},
+		{"ruleson": "onContinue","field": "ProofofResidence", "compareField" : "uploadDocumentList", "source":"State", "type":"list", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"page", "action":"nextQuestion"},
+		{"ruleson": "onContinue","field": "ProofofInsurance", "compareField" : "uploadDocumentList", "source":"State", "type":"list", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"page", "action":"nextQuestion"},
+		{"ruleson": "onContinue","field": "Identification", "compareField" : "uploadDocumentList", "source":"State", "type":"list", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"page", "action":"nextQuestion"},
+		{"ruleson": "onContinue","field": "YourMostRecentPayStub", "compareField" : "uploadDocumentList", "source":"State", "type":"list", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"page", "action":"nextQuestion"},
+		{"ruleson": "onContinue","field": "YourMostRecentTaxReturns", "compareField" : "uploadDocumentList", "source":"State", "type":"list", "operator":"==","threshhold":"String" ,"thresholdType":"list","customMessage":"","actionType":"page", "action":"nextQuestion"},
+
+
+
+		{"ruleson": "onContinue","field": "TradingInVehicle", "compareField" : "No", "source":"", "type":"string", "operator":"==","threshhold":"String" ,"thresholdType":"Value","customMessage":"","actionType":"nextpage", "action":"downPayment"},
+		{"ruleson": "onContinue","field": "TradingInVehicle", "compareField" : "Yes", "source":"", "type":"string", "operator":"==","threshhold":"String" ,"thresholdType":"Value","customMessage":"","actionType":"nextpage", "action":"tradeInValue"},
+		
+		{"ruleson": "onContinue","field": "DownPayment", "compareField" : "No", "source":"", "type":"string", "operator":"==","threshhold":"String" ,"thresholdType":"Value","customMessage":"","actionType":"nextpage", "action":"loanAmount"},
+		{"ruleson": "onContinue","field": "DownPayment", "compareField" : "Yes", "source":"", "type":"string", "operator":"==","threshhold":"String" ,"thresholdType":"Value","customMessage":"","actionType":"nextpage", "action":"downPaymentAmount"},
+
+		{"ruleson": "onContinue","field": "bankInformations", "compareField" : "bankInformations", "source":"", "type":"question", "operator":"==","threshhold":"String" ,"thresholdType":"","customMessage":"","actionType":"nextpage", "action":"thankYou"}
+	],
+	"queryStrings":[ 
+		{ "acceptName": "loanAmount", "postName": "loanAmount", "isQuestion":"true" },
+		{ "acceptName": "loanPurpose", "postName": "loanPurpose", "isQuestion":"true" },
+		{ "acceptName": "partnerid", "postName": "partnerid", "isQuestion":"false" },
+		{ "acceptName": "gclid", "postName": "gclid", "isQuestion":"false" },
+		{ "acceptName": "featured", "postName": "featured", "isQuestion":"false" },
+		{ "acceptName": "programid", "postName": "programid", "isQuestion":"false" },
+		{ "acceptName": "affiliateid", "postName": "affiliateid", "isQuestion":"false" },
+		{ "acceptName": "affiliatesubid", "postName": "affiliatesubid", "isQuestion":"false" },
+		{ "acceptName": "campaignid", "postName": "campaignid", "isQuestion":"false" },
+		{ "acceptName": "utm_source", "postName": "utmSource", "isQuestion":"false" },
+		{ "acceptName": "utm_medium", "postName": "utmMedium", "isQuestion":"false" },
+		{ "acceptName": "utm_term", "postName": "utmTerm", "isQuestion":"false" },
+		{ "acceptName": "utm_campaign", "postName": "utmCampaign", "isQuestion":"false" },
+		{ "acceptName": "utm_content", "postName": "utmContent", "isQuestion":"false" },
+		{ "acceptName": "dealerid", "postName": "dealerid", "isQuestion":"false" },
+		{ "acceptName": "dealerEmail", "postName": "dealerEmail", "isQuestion":"false" },
+		{ "acceptName": "firstname", "postName": "firstname", "isQuestion":"true" },
+		{ "acceptName": "lastname", "postName": "lastname", "isQuestion":"true" },
+		{ "acceptName": "email", "postName": "email", "isQuestion":"true" },
+		{ "acceptName": "subPurpose", "postName": "subPurpose", "isQuestion":"true" },
+		{ "acceptName": "physicianEmail", "postName": "physicianEmail", "isQuestion":"false" },
+		{ "acceptName": "v", "postName": "v", "isQuestion":"false" },
+		{ "acceptName": "applicationId", "postName": "applicationId", "isQuestion":"true" },
+		{ "acceptName": "applicationID", "postName": "applicationID", "isQuestion":"false" },
+		{ "acceptName": "coBorrowerRequired", "postName": "coBorrowerRequired", "isQuestion":"true" },
+		{ "acceptName": "desiredTerm", "postName": "desiredTerm", "isQuestion":"true" },
+		{ "acceptName": "accountNumber", "postName": "accountNumber", "isQuestion":"false" }
+	],
+	"defaultState" : [
+		{"name": "borrowerNode","value":"","dataType":"array" },
+		{"name": "coborrowerNode","value":"","dataType":"array" },
+		{"name": "employmentNode","value":"","dataType":"array" },	
+		{"name": "Pages","value":"","dataType":"array" },
+		{"name": "currentPageName","value":"","dataType":"string" },
+		{"name": "IpAddress","value":"","dataType":"string" },
+		{"name": "mpUniqueClickID","value":"","dataType":"string" },
+		{"name": "IsContinue","value":"false","dataType":"bool" },
+		{"name": "buttonText","value":"Continue","dataType":"string" },
+		{"name": "currentPage","value":"1","dataType":"number" },
+		{"name": "IsFormSubmitted","value":"false","dataType":"bool" },
+		{"name": "ShowConsent","value":"false","dataType":"bool" },
+		{"name": "bifurcatedPageArray","value":"false","dataType":"initialArray" },
+		{"name": "initialDisabled","value":"false","dataType":"bool" },		 
+		{"name": "AgreePqTerms","value":"true","dataType":"bool" },
+		{"name": "AgreeTCPA","value":"false","dataType":"bool" },
+		{"name": "showModal","value":"false","dataType":"bool" },
+		{"name": "showFundingModal","value":"false","dataType":"bool" },
+		{"name": "loaderContent","value":"","dataType":"string" },
+		{"name": "InCompleteEmailSent","value":"false","dataType":"bool" },
+		{"name": "showLenderImage","value":"","dataType":"string" },
+		{"name": "zipCodeArray","value":"","dataType":"array" },
+		{"name": "cityCodeArray","value":"","dataType":"array" },
+		{"name": "stateCodeArray","value":"","dataType":"array" },
+		{"name": "URLPrefix","value":"","dataType":"string" },
+		{"name": "TransactionTypeValue","value":"","dataType":"string" },
+		{"name": "FormSubmissionCount","value":"","dataType":"string" },
+		{"name": "ProductTypeValue","value":"formSettings.productType","dataType":"configSetting" },
+		{"name": "BrandNameValue","value":"formSettings.brandName","dataType":"configSetting" }
+	],
+	"requestNode": [
+		{ "name": "transactionType", "value": "TransactionType", "valueType":"state" },
+		{ "name": "currentTime", "value": "CurrentTime", "valueType":"state" },
+		{ "name": "gclid", "value": "gclid", "valueType":"props-qs" },
+		{ "name": "loanAmount", "value": "LoanAmount", "valueType":"state", "isPlain" : "true" },
+		{ "name": "loanPurpose", "value": "LoanPurpose", "valueType":"state" },
+		{ "name": "partnerId", "value": "PartnerId", "valueType":"props-qs" },
+		{ "name": "uuid", "value": "uuid", "valueType":"window" },
+		{ "name": "offerId", "value": "OfferId", "valueType":"state" },
+		{ "name": "programId", "value": "programid", "valueType":"props-qs" },
+		{ "name": "featured", "value": "Featured", "valueType":"props-qs" },
+		{ "name": "affiliateId", "value": "affiliateid", "valueType":"props-qs" },
+		{ "name": "deviceType", "value": "currentDevice", "valueType":"props" },
+		{ "name": "browser", "value": "currentBrowser", "valueType":"props" },
+		{ "name": "os", "value": "currentOS", "valueType":"props" },
+		{ "name": "applicationId", "value": "ApplicationId", "valueType":"state" },
+		{ "name": "subPurpose", "value": "SubPurpose", "valueType":"state" },
+		{ "name": "dealerId", "value": "dealerid", "valueType":"state" },
+		{ "name": "reuseableOffer", "value": "ReuseableOffer", "valueType":"state" },
+		{ "name": "includeFees", "value": "IncludeFees", "valueType":"state" },
+		{ "name": "originationFees", "value": "OriginationFees", "valueType":"state" },
+		{ "name": "byPassDupCheck", "value": "ByPassDupCheck", "valueType":"state" },
+		{ "name": "affiliateSubId", "value": "affiliatesubid", "valueType":"props-qs" },
+		{ "name": "affiliateTrackingId", "value": "AffiliateTrackingId", "valueType":"state" },
+		{ "name": "leadCheckDateTime", "value": "LeadCheckDateTime", "valueType":"state" },
+		{ "name": "outcome", "value": "Outcome", "valueType":"state" },
+		{ "name": "rejectedReason", "value": "RejectedReason", "valueType":"state" },
+		{ "name": "errorMessage", "value": "ErrorMessage", "valueType":"state" },
+		{ "name": "httpErrorCode", "value": "HttpErrorCode", "valueType":"state" },
+		{ "name": "formUrl", "value": "FormUrl", "valueType":"state" },
+		{ "name": "bid", "value": "Bid", "valueType":"state" },
+		{ "name": "disclaimer", "value": "Disclaimer", "valueType":"state" },
+		{ "name": "action", "value": "Action", "valueType":"props" },
+		{ "name": "ipAddress", "value": "IpAddress", "valueType":"state" },
+		{ "name": "bankAccountPlaidToken", "value": "BankAccountPlaidToken", "valueType":"state" },
+		{ "name": "numberOfDaysRequested", "value": "NumberOfDaysRequested", "valueType":"state" },
+		{ "name": "senderDomain", "value": "SenderDomain", "valueType":"props" },
+		{ "name": "bankRoutingNumber", "value": "BankRoutingNumber", "valueType":"state" },
+		{ "name": "bankAccountNumber", "value": "BankAccountNumber", "valueType":"state" },
+		{ "name": "identification", "value": "Identification", "valueType":"state" },
+		{ "name": "reusableOffer", "value": "ReusableOffer", "valueType":"state" },
+		{ "name": "lenderId", "value": "LenderId", "valueType":"state" },
+		{ "name": "offerDate", "value": "OfferDate", "valueType":"state" },
+		{ "name": "campaignId", "value": "campaignid", "valueType":"props-qs" },
+		{ "name": "coBorrowerRequired", "value": "CoBorrowerRequired", "valueType":"state" },
+		{ "name": "utmSource", "value": "utm_source", "valueType":"props-qs" },
+		{ "name": "utmMedium", "value": "utm_medium", "valueType":"props-qs" },
+		{ "name": "utmTerm", "value": "utm_term", "valueType":"props-qs" },
+		{ "name": "utmCampaign", "value": "utm_campaign", "valueType":"props-qs" },
+		{ "name": "utmContent", "value": "utm_content", "valueType":"props-qs" },
+		{ "name": "applicationUuid", "value": "ApplicationUuid", "valueType":"state" },
+		{ "name": "hSessionId", "value": "HSessionId", "valueType":"window" },
+		{ "name": "prsessionid", "value": "prSessionid", "valueType": "window" },
+		{ "name": "mpUniqueClickID", "value": "prClid", "valueType": "state" },
+		{ "name": "borrowers", "value": "borrowerNode", "valueType":"configNode", "additionalBorrower": { "stateName": "AdditionalBorrowerValue", "stateValue": "Yes", "configNode": "coborrowerNode"} },
+		{ "name": "formSubmissionCount", "value": "FormSubmissionCount", "valueType":"state" },
+		{ "name": "accountNumber","value":"accountNumber","valueType":"props-qs" },
+		{ "name": "desiredTerm","value":"DesiredTerm","valueType":"state" },
+		{ "name": "productType","value":"ProductType","valueType":"state" },
+		{ "name": "brandName","value":"BrandName","valueType":"state" }
+	],
+	"borrowerNode" : [
+		{ "name": "address1", "value": "Address1", "valueType":"state" },
+		{ "name": "address2", "value": "Address2", "valueType":"state" },
+		{ "name": "city", "value": "City", "valueType":"state" },
+		{ "name": "state", "value": "State", "valueType":"state" },
+		{ "name": "zipCode", "value": "ZipCode", "valueType":"state" },
+		{ "name": "housingStatus", "value": "HousingStatus", "valueType":"state" },
+		{ "name": "housingPayment", "value": "HousingPayment", "valueType":"state", "isPlain" : "true" },
+		{ "name": "creditScore", "value": "CreditScore", "valueType":"state" },
+		{ "name": "dateOfBirth", "value": "DateOfBirth", "valueType":"state", "currentFormat" :"MM/DD/YYYY" , "newFormat" : "YYYY-MM-DD" },
+		{ "name": "employmentStatus", "value": "EmploymentStatus", "valueType":"state" },
+		{ "name": "annualIncome", "value": "AnnualIncome", "valueType":"state", "isPlain" : "true" },
+		{ "name": "firstName", "value": "FirstName", "valueType":"state" },
+		{ "name": "lastName", "value": "LastName", "valueType":"state" },
+		{ "name": "primaryPhoneNumber", "value": "PrimaryPhoneNumber", "valueType":"state", "isPlain" : "true" },
+		{ "name": "emailAddress", "value": "EmailAddress", "valueType":"state" },
+		{ "name": "ssn", "value": "SSN", "valueType":"state", "isPlain" : "true" },
+		{ "name": "agreePqTerms", "value": "AgreePqTerms", "valueType":"state" },
+		{ "name": "agreeTCPA", "value": "AgreeTCPA", "valueType":"state" },
+		{ "name": "secondaryPhoneNumber", "value": "SecondaryPhoneNumber", "valueType":"state", "isPlain" : "true" },
+		{ "name": "primaryBorrower", "value": "PrimaryBorrower", "valueType":"state" },
+		{ "name": "military", "value": "Military", "valueType":"state" },
+		{ "name": "citizenship", "value": "Citizenship", "valueType":"state" },
+		{ "name": "location", "value": "Location", "valueType":"state" },
+		{ "name": "education", "value": "Education", "valueType":"state" },
+		{ "name": "employmentInformation", "value": "employmentNode", "valueType":"configNode" }
+	],
+	"coborrowerNode" : [
+		{ "name": "address1", "value": "CbAddress1", "valueType":"state" },
+		{ "name": "address2", "value": "CbAddress2", "valueType":"state" },
+		{ "name": "city", "value": "CbCity", "valueType":"state" },
+		{ "name": "state", "value": "CbState", "valueType":"state" },
+		{ "name": "zipCode", "value": "CbZipCode", "valueType":"state" },
+		{ "name": "housingStatus", "value": "cbHousingStatus", "valueType":"state" },
+		{ "name": "housingPayment", "value": "cbHousingPayment", "valueType":"state", "isPlain" : "true" },
+		{ "name": "creditScore", "value": "cbCreditScore", "valueType":"state" },
+		{ "name": "dateOfBirth", "value": "cbDateOfBirth", "valueType":"state", "currentFormat" :"MM/DD/YYYY" , "newFormat" : "YYYY-MM-DD" },
+		{ "name": "employmentStatus", "value": "cbEmploymentStatus", "valueType":"state" },
+		{ "name": "annualIncome", "value": "cbAnnualIncome", "valueType":"state", "isPlain" : "true" },
+		{ "name": "firstName", "value": "cbFirstName", "valueType":"state" },
+		{ "name": "lastName", "value": "cbLastName", "valueType":"state" },
+		{ "name": "primaryPhoneNumber", "value": "cbPrimaryPhoneNumber", "valueType":"state", "isPlain" : "true" },
+		{ "name": "emailAddress", "value": "cbEmailAddress", "valueType":"state" },
+		{ "name": "ssn", "value": "cbSSN", "valueType":"state", "isPlain" : "true" }
+	],
+	"employmentNode" : [ 
+		{ "name": "employerName", "value": "EmployerName", "valueType":"state" },
+		{ "name": "position", "value": "Position", "valueType":"state" },
+		{ "name": "startDate", "value": "StartDate", "valueType":"state", "currentFormat" :"MM/DD/YYYY" , "newFormat" : "YYYY-MM-DD" },
+		{ "name": "endDate", "value": "EndDate", "valueType":"state", "currentFormat" :"MM/DD/YYYY" , "newFormat" : "YYYY-MM-DD" },
+		{ "name": "employerAddress1", "value": "EmployerAddress1", "valueType":"state" },
+		{ "name": "employerAddress2", "value": "EmployerAddress2", "valueType":"state" },
+		{ "name": "employerCity", "value": "EmployerCity", "valueType":"state" },
+		{ "name": "employerState", "value": "EmployerState", "valueType":"state" },
+		{ "name": "employerZipCode", "value": "EmployerZipCode", "valueType":"state" },
+		{ "name": "employerPhoneNumber", "value": "EmployerPhoneNumber", "valueType":"state", "isPlain" : "true" },
+		{ "name": "salaryAmount", "value": "SalaryAmount", "valueType":"state", "isPlain" : "true" },
+		{ "name": "salaryPeriod", "value": "SalaryPeriod", "valueType":"state" }
+	],	
+    "questions": [
+		{ 
+			"id": 1, 
+			"name" : "loanPurpose",
+			"type" : "dropdown",
+			"title" : "What is the purpose of the loan?", 
+			"placeholder" : "Select a loan purpose", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"loanPurposeList",
+			"focus": true,
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"stateName" : "LoanPurpose",
+			"queryString" : { "accept" : true, "postName" : "loanPurpose", "skip" : true },
+			"postData": "loanPurpose",
+			"listName": "loanPurposeList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Loan Purpose:",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.loanPurpose",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 51, 
+			"name":"address1" , 
+			"type": "text",
+			"title" : "Your Street Address", 
+			"placeholder" : "Street address", 
+			"errormessage" : "Only 50 characters is allowed.", 
+			"required" : "Please enter Street Address", 
+			"showTitle" : false,
+			"focus": true,
+            "stateName" : "Address1",
+			"queryString" : { "accept" : false, "postName" : "address1", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"customValidation": {
+				"maxcharacter": 50,
+				"externalValidation": 
+				 {
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"Address1","type":"textbox"},
+									"City": {"name":"City","type":"textbox"},
+									"State": {"name":"State","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"City","type":"textbox"},
+						"stateCodeArray": {"name":"State","type":"dropdown"},
+						"zipCodeArray": {"name":"ZipCode","type":"textbox"}
+					}
+				 }
+			},
+			"autoComplete": true,			
+			"titleClass": "col-sm-12",
+			"prequalifyButtonClass": " center-align ",
+			"postData": "address1",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"isAddressGroup": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Address1:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].address1",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"parentId": 51,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 52, 
+			"name":"address2" ,
+			"type": "text",
+			"title" : "Apartment", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 20 characters is allowed.", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false,
+            "stateName" : "Address2",
+			"queryString" : { "accept" : false, "postName" : "address2", "skip" : false },
+			"value":"",
+			"postData": "address2",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"isAddressGroup": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Address2:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].address2",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"parentId": 51,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 53, 
+			"name":"city" ,
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "City", 
+			"errormessage" : "Invalid city for selected state", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false,
+            "stateName" : "City",
+			"queryString" : { "accept" : false, "postName" : "city", "skip" : false },
+			"validationRules": {
+				"required": true
+			},
+			"customValidation": {
+				"externalValidation": 
+				 {
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"Address1","type":"textbox"},
+									"City": {"name":"City","type":"textbox"},
+									"State": {"name":"State","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"City","type":"textbox"},
+						"stateCodeArray": {"name":"State","type":"dropdown"},
+						"zipCodeArray": {"name":"ZipCode","type":"textbox"}
+					}
+				 }
+			},
+			"value":"",
+			"postData": "city",
+			"columnStyle":"text-control-align new-height  col-sm-4 col-xs-12  ",
+			"isAddressGroup": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "City:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].city",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"parentId": 51,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 54, 
+			"name":"state",
+			"type" : "dropdown",
+			"title" : "",  
+			"placeholder" : "State", 
+			"errormessage" : "Selected state is not valid", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"stateList" ,
+			"focus": false,
+            "stateName" : "State",
+			"queryString" : { "accept" : false, "postName" : "state", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			  
+			"customValidation": {
+				"externalValidation": 
+				 {
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"Address1","type":"textbox"},
+									"City": {"name":"City","type":"textbox"},
+									"State": {"name":"State","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"City","type":"textbox"},
+						"stateCodeArray": {"name":"State","type":"dropdown"},
+						"zipCodeArray": {"name":"ZipCode","type":"textbox"}
+					}
+				 }
+			},
+			"value":"",
+			"postData": "state",
+			"listName": "stateList",
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"isAddressGroup": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "State:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].state",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"parentId": 51,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 55, 
+			"name":"zipCode",
+			"type": "text",
+			"title" : "What is your zip code?", 
+			"placeholder" : "Zip", 
+			"errormessage" : "Invalid zip code.", 
+			"required" : "Please enter Zip", 
+			"showTitle" : false,
+			"focus": false,
+            "stateName" : "ZipCode",
+			"queryString" : { "accept" : false, "postName" : "zipCode", "skip" : false },
+			"state" : "ZipCode",
+			
+			"validationRules": {
+				"required": true
+			  },
+			  
+			"customValidation": {
+				"externalValidation": 
+				 {
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"Address1","type":"textbox"},
+									"City": {"name":"City","type":"textbox"},
+									"State": {"name":"State","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"City","type":"textbox"},
+						"stateCodeArray": {"name":"State","type":"dropdown"},
+						"zipCodeArray": {"name":"ZipCode","type":"textbox"}
+					}
+				 }
+			},
+			"value":"",
+			"postData": "zipcode",
+			"columnStyle":"text-control-align new-height  col-sm-4 col-xs-12  ",
+			
+			"isAddressGroup": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Zip Code:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].zipCode",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"parentId": 51,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 3, 
+			"name":"address",
+			"type" : "group",
+			"subquestions": [51,52,53,54,55]
+        },
+        { 
+			"id": 4, 
+			"name":"housingStatus",
+			"type": "button",
+			"title" : "What is your housing status?", 
+			"placeholder" : "Housing", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"housingList",
+			"focus": true,
+            "stateName" : "HousingStatus",
+			"queryString" : { "accept" : false, "postName" : "housingStatus", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			  "nextpage":
+			  {
+				"Default" : "creditScore",
+				"RENT" : "housingPayment",
+				"OWN_WITH_MORTGAGE":"housingPayment",
+				"Own – with mortgage":"housingPayment"
+				  },
+			"value":"",
+			"postData": "housing",
+			"listName": "housingList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Housing Status:",
+				"controlType": "dropdown",
+				"editable" : true,
+				"postData":"borrowers[0].housingStatus",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 5, 
+			"name":"housingPayment",
+			"type": "text",
+			"title" : "What is your monthly housing payment?", 
+			"placeholder" : "$0", 
+			"errormessage" : "Invalid Payment.", 
+			"errormessagecode" : "Enter an amount between ", 
+			"required" : "Please enter Housing Payment", 
+			"showTitle" : true,
+			"focus": false,
+            "stateName" : "HousingPayment",
+			"queryString" : { "accept" : false, "postName" : "housingPayment", "skip" : false },
+			"validationRules": {
+				"required": true,
+				"max": "1000000",
+				"min":"0"
+			  },
+			"value":"",
+			"errorCode": "CodeError",
+			"isNumber": true,
+			"postData": "housingPayment",
+			"maxLength": "8",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Housing Payment:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].housingPayment",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 6, 
+			"name":"creditScore",
+			"type": "fa-button",
+			"title" : "What is your estimated credit score?", 
+			"placeholder" : "Estimated credit score", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"estimatedCreditScoreList",
+			"focus": true,
+            "stateName" : "CreditScore",
+			"queryString" : { "accept" : false, "postName" : "creditScore", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "creditscore",
+			"listName": "estimatedCreditScoreList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"extendWidth": true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Credit Score:",
+				"controlType": "dropdown",
+				"editable" : true,
+				"postData":"borrowers[0].creditScore",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 7, 
+			"name":"dateOfBirth",
+			"type": "masked-text",
+			"title" : "When were you born?", 
+			"placeholder" : "MM/DD/YYYY",
+			"pattern" : "date",
+			"errormessage" : "Borrower must be at least 18 years old.", 
+			"required" : "Please enter Birthdate", 
+			"showTitle" : true,
+			"focus": true,
+			"stateName" : "DateOfBirth",
+			"queryString" : { "accept" : false, "postName" : "dateOfBirth", "skip" : false },
+			"label":"BirthDate",
+			"validationRules": {
+				"required": true
+			  },
+			  "customValidation": {
+				"minAge" :{"value":"18","rules":"^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$"},
+				"maxAge":{"value":"100","rules":"^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$"}
+			},
+			"value":"",
+			"postData": "dateOfBirth",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Date Of Birth:",
+				"controlType": "masked-text",
+				"editable" : true,
+				"postData":"borrowers[0].dateOfBirth",
+				"postDataPattern": "YYYY-MM-DD",
+				"valuePattern": "MM/DD/YYYY",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 8, 
+			"name":"employmentStatus",
+			"type": "button",
+			"title" : "What is your employment status?", 
+			"placeholder" : "Employment", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"employmentList",
+			"focus": true,
+            "stateName" : "EmploymentStatus",
+			"queryString" : { "accept" : false, "postName" : "employmentStatus", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "employment",
+			"listName": "employmentList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Employment Status:",
+				"controlType": "dropdown",
+				"editable" : true,
+				"postData":"borrowers[0].employmentStatus",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 9, 
+			"name":"annualIncome",
+			"type": "text",
+			"title" : "Your Net Annual Income", 
+			"placeholder" : "$0", 
+			"errormessage" : "", 
+			"errormessagecode" : "Insufficient Annual Income",
+			"custommessage" : "Net Annual Income between $ 7,200 and $ 10,000,000.", 
+			"required" : "Please enter Annual Income", 
+			"showTitle" : true,
+			"focus": false,
+            "stateName" : "AnnualIncome",
+			"queryString" : { "accept" : false, "postName" : "annualIncome", "skip" : false },
+			"validationRules": {
+				"required": true				
+			  },
+			"customValidation":
+			{
+				"min-max":"7200-10000000"
+			},
+			"value":"",
+			"errorCode": "MinError",
+			"isNumber": true,
+			"postData": "annualincome",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel",
+			"showToolTip": true,
+			"tooltipText": "List your total available income including wages, retirement, investments, and rental properties. You are not required to disclose income that is alimony, child support or separate maintenance unless you want to use that income to qualify for a loan. If applicable, include self-employment salary. For total commission earnings, provide an annual average. Increase non-taxable income/benefits by 25%.",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Annual Income:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].annualIncome",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 56, 
+			"name":"firstName",
+			"type": "text",
+			"title" : "Your Name", 
+			"placeholder" : "First Name", 
+			"errormessage" : "", 
+			"required" : "Please enter your first name.", 
+			"showTitle" : false,
+			"focus": true,
+            "stateName" : "FirstName",
+			"queryString" : { "accept" : false, "postName" : "firstName", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"max": "50",
+			"titleClass": "col-sm-12 col-xs-12",
+			"prequalifyButtonClass": " center-align ",
+			"postData": "firstname",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "First Name:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].firstName",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 57, 
+			"name":"lastName",
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Last Name", 
+			"errormessage" : "", 
+			"required" : "Please enter your last name.", 
+			"showTitle" : false,
+			"focus": false,
+            "stateName" : "LastName",
+			"queryString" : { "accept" : false, "postName" : "lastName", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"max": "50",
+			"postData": "lastname",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Last Name:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].lastName",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},{ 
+			"id": 10, 
+			"name":"name",
+			"type": "group",
+			"subquestions": [56,57]
+        },
+		{ 
+			"id": 11, 
+			"name":"primaryPhoneNumber",
+			"type": "masked-text",
+			"title" : "Primary Phone Number", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"pattern" : "phone",
+			"errormessage" : "Invalid Primary Phone Number.", 
+			"required" : "Please enter Primary Phone Number", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6,
+            "stateName" : "PrimaryPhoneNumber",
+			"queryString" : { "accept" : false, "postName" : "primaryPhoneNumber", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			  "customValidation": {
+					"phonenumber":{"value":"1","rules":"\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}"},
+					"externalValidation": 
+					{
+						"method":"commonValidateAPIAJAX",
+						"apiURL":"https://apilayer.net/api/validate?",
+						"apikey":"access_key=86c97b1559bd320f30967010f3150b2b",
+						"isvalueonly":false,
+						"isequalsign":false,
+						"payloadkey":
+									{
+										"number=1": {"name":"PrimaryPhoneNumber","type":"textbox"}
+									}
+						
+					}
+
+			},
+			  
+			"value":"",
+			"errorCode": "CodeError",
+			"postData": "phonenumber",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Phone Number:",
+				"controlType": "masked-text",
+				"editable" : true,
+				"postData":"borrowers[0].primaryPhoneNumber",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},		 
+        { 
+			"id": 12, 
+			"name":"emailAddress",
+			"type": "text",
+			"title" : "Email Address", 
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid email address.", 
+			"required" : "Please enter a valid email address.", 
+			"showTitle" : true,
+			"focus": true,
+            "stateName" : "EmailAddress",
+			"queryString" : { "accept" : false, "postName" : "emailAddress", "skip" : false },
+			"validationRules": {
+				"required": true,
+				"isEmail":true
+			  },
+			"customValidation": {
+				"EmailAddress":{"value":"1","rules":"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"}
+			},
+			"value":"",
+			"inputType":"email",
+			"showToolTip": true,
+			"tooltipText": "We use email to alert you if there's a problem during the pre-qualification process and about important account information",
+			"postData": "emailAddress",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Email Address:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].emailAddress",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 58, 
+			"name":"SSN",
+			"type": "masked-text",
+			"title" : "Please enter your SSN", 
+			"placeholder" : "xxx-xx-xxxx", 
+			"pattern" : "ssn",
+			"errormessage" : "Invalid SSN.", 
+			"required" : "Please enter a valid SSN", 
+			"showTitle" : true,
+			"focus": true,
+			"showConsent" :true,
+            "stateName" : "SSN",
+			"queryString" : { "accept" : false, "postName" : "SSN", "skip" : false },
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"submitForm": true,
+			"formPostURL": "/los-engine/offers",
+			"transactionType" : "LOSApplication",
+			"buttonText" : "View Pre-Qualified Offers",
+			"postData": "ssn",
+			"minLength": "9",
+			"maxLength": "9",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel",
+			"formSubmissionCount" : 1,			
+			"isPassword" :true,
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "Social Security Number:",
+				"controlType": "masked-text",
+				"editable" : true,
+				"postData":"borrowers[0].ssn",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+        },
+        { 
+			"id": 59, 
+			"name":"agreePqTerms",
+			"type": "checkBox", 
+			"showCheckbox" : true,
+            "focus": true,
+            "defaultChecked": false,
+            "stateName" : "AgreePqTerms",
+			"queryString" : { "accept" : false, "postName" : "agreePqTerms", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+        },
+        { 
+			"id": 60, 
+			"name":"agreeTCPA",
+			"type": "checkBox", 
+			"showCheckbox" : true,
+            "focus": true,
+            "defaultChecked": false,
+            "stateName" : "AgreeTCPA",
+			"queryString" : { "accept" : false, "postName" : "agreeTCPA", "skip" : false },
+			"validationRules": {
+				"required": false
+			  },
+			"value":"",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+        },
+        { 
+			"id": 13, 
+			"name":"agreeTerms",
+			"type": "group",
+			"subquestions": [58,59,60]
+		},
+		{ 
+			"id": 14, 
+			"name":"secondaryPhoneNumber",
+			"type": "masked-text",
+			"title" : "Secondary Phone Number", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"pattern" : "phone",
+			"errormessage" : "Invalid Secondary Phone Number.", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6,
+            "stateName" : "SecondaryPhoneNumber",
+			"queryString" : { "accept" : false, "postName" : "secondaryPhoneNumber", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+		},	
+		{ 
+			"id": 31, 
+			"name":"employerName",
+			"type": "text",
+			"title" : "Please enter your most current employment information", 
+			"placeholder" : "Employer Name", 
+			"errormessage" : "Please enter Employer Name", 
+			"required" : "Please enter Employer Name", 
+			"showTitle" : true,
+			"focus": true,
+			"col" : 6,
+            "stateName" : "EmployerName",
+			"queryString" : { "accept" : false, "postName" : "employerName", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"max": "50",
+			"extendWidth": true,
+			"titleClass": "col-sm-12 col-xs-12",
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 clear-both",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Employer Name:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerName",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 32, 
+			"name":"position",
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Position / Title", 
+			"errormessage" : "Please enter Position", 
+			"required" : "Please enter Position", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "Position",
+			"queryString" : { "accept" : false, "postName" : "position", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"max": "50",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Position:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].position",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 33, 
+			"name":"startDate",
+			"type": "masked-text",
+			"title" : "", 
+			"placeholder" : "Start Date (MM/DD/YYYY)", 
+			"pattern" : "date",
+			"errormessage" : "Please enter valid Start Date", 
+			"required" : "Please enter Start Date", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 6,
+			"label":"Start Date",
+            "stateName" : "StartDate",
+			"queryString" : { "accept" : false, "postName" : "startDate", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"customValidation": {
+				 "minAge" :{"value":"0","rules":"^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$" , "customMessage":"Start date should not be future date."}
+				
+			},
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Start Date:",
+				"controlType": "masked-text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].startDate",
+				"postDataPattern": "YYYY-MM-DD",
+				"valuePattern": "MM/DD/YYYY",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 34, 
+			"name":"endDate",
+			"type": "masked-text",
+			"title" : "", 
+			"placeholder" : "End Date (MM/DD/YYYY)", 
+			"pattern" : "date",
+			"errormessage" : "Please enter valid End Date", 
+			"required" : "Please enter End Date", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 6,
+			"checkBoxText":"Current Position",
+			"showCheckbox" : true,
+			"checkBoxStateName": "EndDateCheckBoxChecked",
+			"checkBoxDisabledStateName": "EndDateDisabled",
+			"currentPositionText" :"Present",
+            "stateName" : "EndDate",
+			"queryString" : { "accept" : false, "postName" : "endDate", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "End Date:",
+				"controlType": "masked-text-check-box",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].endDate",
+				"postDataPattern": "YYYY-MM-DD",
+				"valuePattern": "MM/DD/YYYY",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},	
+		{ 
+			"id": 61, 
+			"name":"employerAddress1", 
+			"type": "text",
+			"title" : "Please enter your current employment information", 
+			"placeholder" : "Employer Street address", 
+			"errormessage" : "Only 50 characters is allowed.", 
+			"required" : "Please enter Street Address", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "EmployerAddress1",
+			"queryString" : { "accept" : false, "postName" : "employerAddress1", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"customValidation": {
+				"maxcharacter": 50,
+				"externalValidation": 
+				{
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"EmployerAddress1","type":"textbox"},
+									"City": {"name":"EmployerCity","type":"textbox"},
+									"State": {"name":"EmployerState","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"EmployerCity","type":"textbox"},
+						"stateCodeArray": {"name":"EmployerState","type":"dropdown"},
+						"zipCodeArray": {"name":"EmployerZipCode","type":"textbox"}
+					}
+				}
+			},
+			"value":"",
+			"autoComplete": true,
+			"titleClass": "col-sm-12",
+			"prequalifyButtonClass": " center-align ",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"isAddressGroup": true,
+			"isEmploymentInformation": true,
+			"focusField":"employerPhoneNumber",
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Address1:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerAddress1",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"parentId": 61,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},		
+		{ 
+			"id": 62, 
+			"name":"employerAddress2",
+			"type": "text",
+			"title" : "Apartment", 
+			"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+			"errormessage" : "Only 20 characters is allowed.", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "EmployerAddress2",
+			"queryString" : { "accept" : false, "postName" : "employerAddress2", "skip" : false },
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"isAddressGroup": true,
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Address2:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerAddress2",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"parentId": 61,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},	
+		{ 
+			"id": 63, 
+			"name":"employerCity",
+			"type": "text",
+			"title" : "City", 
+			"placeholder" : "Employer City", 
+			"errormessage" : "Invalid city for selected state", 
+			"required" : "Please enter City", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 4,
+            "stateName" : "EmployerCity",
+			"queryString" : { "accept" : false, "postName" : "employerCity", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			 "customValidation": {
+				"externalValidation": 
+				{
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"EmployerAddress1","type":"textbox"},
+									"City": {"name":"EmployerCity","type":"textbox"},
+									"State": {"name":"EmployerState","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"EmployerCity","type":"textbox"},
+						"stateCodeArray": {"name":"EmployerState","type":"dropdown"},
+						"zipCodeArray": {"name":"EmployerZipCode","type":"textbox"}
+					}
+				}
+			},
+			"value":"",
+			"extendWidth": true,
+			"postData": "employerCity",
+			"columnStyle":"text-control-align new-height  col-sm-4 col-xs-12 ",
+			"isAddressGroup": true,
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "City:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerCity",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"parentId": 61,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 64, 
+			"name":"employerState",
+			"type" : "dropdown",
+			"title" : "",  
+			"placeholder" : "Employer State", 
+			"errormessage" : "Selected state is not valid", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"stateList" ,
+			"focus": false,
+			"col" : 4,
+            "stateName" : "EmployerState",
+			"queryString" : { "accept" : false, "postName" : "employerState", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"customValidation": {
+				"externalValidation": 
+				{
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"EmployerAddress1","type":"textbox"},
+									"City": {"name":"EmployerCity","type":"textbox"},
+									"State": {"name":"EmployerState","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"EmployerCity","type":"textbox"},
+						"stateCodeArray": {"name":"EmployerState","type":"dropdown"},
+						"zipCodeArray": {"name":"EmployerZipCode","type":"textbox"}
+					}
+				}
+			},
+			"value":"",
+			"extendWidth": true,
+			"postData": "employerState",
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"isAddressGroup": true,
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "State:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerState",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"parentId": 61,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 65, 
+			"name":"employerZipCode",
+			"type": "text",
+			"title" : "What is your zip code?", 
+			"placeholder" : "Employer Zip Code", 
+			"errormessage" : "Invalid zip code.", 
+			"required" : "Please enter Zip", 
+			"showTitle" : false,
+			"focus": false,
+			"col" : 4,
+            "stateName" : "EmployerZipCode",
+			"queryString" : { "accept" : false, "postName" : "employerZipCode", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			  "customValidation": {
+				"externalValidation": 
+				{
+					"method":"validateCityStateZipAjax",
+					"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+					"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+					"isvalueonly":true,
+					"payloadkey":
+								{
+									"Address": {"name":"EmployerAddress1","type":"textbox"},
+									"City": {"name":"EmployerCity","type":"textbox"},
+									"State": {"name":"EmployerState","type":"dropdown"}
+								},
+					 "validate":{
+						"cityCodeArray": {"name":"EmployerCity","type":"textbox"},
+						"stateCodeArray": {"name":"EmployerState","type":"dropdown"},
+						"zipCodeArray": {"name":"EmployerZipCode","type":"textbox"}
+					}
+				}
+			},
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"inputType": "tel",
+			"isAddressGroup": true,
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Zip Code:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerZipCode",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"parentId": 61,
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 66, 
+			"name":"employerPhoneNumber" ,
+			"type": "masked-text",
+			"title" : "", 
+			"placeholder" : "Employer Phone (xxx) xxx-xxxx", 
+			"pattern" : "phone",
+			"errormessage" : "Invalid Employer Phone Number.", 
+			"required" : "Please enter Phone Number", 
+			"showTitle" : true,
+			"focus": false,
+            "stateName" : "EmployerPhoneNumber",
+			"queryString" : { "accept" : false, "postName" : "employerPhoneNumber", "skip" : false },
+			"validationRules": {
+				"required": true
+			  }, "customValidation": {
+				"phonenumber":{"value":"1","rules":"\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}"},
+				"externalValidation": 
+				{
+					"method":"commonValidateAPIAJAX",
+					"apiURL":"https://apilayer.net/api/validate?",
+					"apikey":"access_key=86c97b1559bd320f30967010f3150b2b",
+					"isvalueonly":false,
+					"isequalsign":false,
+					"payloadkey":
+								{
+									"number=1": {"name":"EmployerPhoneNumber","type":"textbox"}
+								}
+					
+				}
+
+		},
+			"value":"",
+			"extendWidth": false,
+			"postData": "phonenumber",
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 clear-both",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Phone Number:",
+				"controlType": "masked-text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].employerPhoneNumber",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 67, 
+			"name":"employerSecondaryphonenumber",
+			"type": "masked-text",
+			"title" : "Secondary Phone Number", 
+			"placeholder" : "(xxx) xxx-xxxx", 
+			"pattern" : "phone",
+			"errormessage" : "Invalid Secondary Phone Number.", 
+			"required" : "", 
+			"showTitle" : true,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "EmployerSecondaryphonenumber",
+			"queryString" : { "accept" : false, "postName" : "employerSecondaryphonenumber", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0
+		},		
+		{ 
+			"id": 37, 
+			"name":"salaryAmount",
+			"type": "text",
+			"title" : "", 
+			"placeholder" : "Salary Amount", 
+			"errormessage" : "", 
+			"errormessagecode" : "",
+			"required" : "Please enter Salary Amount", 
+			"showTitle" : true,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "SalaryAmount",
+			"queryString" : { "accept" : false, "postName" : "salaryAmount", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "annualIncome",
+			"isNumber": true,
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Salary Amount:",
+				"controlType": "text",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].salaryAmount",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 38, 
+			"name":"salaryPeriod",
+			"type" : "dropdown",
+			"title" : "",  
+			"placeholder" : "Salary Period", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"salaryPeriodList" ,
+			"focus": false,
+			"col" : 6,
+            "stateName" : "SalaryPeriod",
+			"queryString" : { "accept" : false, "postName" : "salaryPeriod", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"extendWidth": true,
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 ",
+			"isEmploymentInformation": true,
+			"defaultSelection": "yearly",
+			"employmentInformationLevel": 0,
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "Salary Period:",
+				"controlType": "dropdown",
+				"editable" : true,
+				"postData":"borrowers[0].employmentInformation[0].salaryPeriod",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 39, 
+			"name":"employerDetails",
+			"type" : "group",
+			"subquestions": [31,32,33,34,37,38,61,62,63,64,65,66]
+		},     
+		{ 
+			"id": 40, 
+			"name":"summarypage",
+			"type" : "summary",
+			"title" : "",
+			"col" : 12,
+			"submitForm": true,			
+			"formPostURL": "/los-engine/bank-linking",
+			"transactionType" : "LOSFullApplication",
+			"showActionButton" : "no",
+			"extendWidth": true,
+			"buttonText" : "Submit Application",
+			"formSubmissionCount" : 3
+		},
+		{
+			"id": 41, 
+			"name":"additionalBorrower",
+			"type": "button",
+			"title" : "Would you like to add an additional borrower?", 
+			"placeholder" : "CoBorrower", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : true,
+			"listItem":"addCoBorrowerList",
+			"focus": true,
+            "stateName" : "AdditionalBorrower",
+			"queryString" : { "accept" : false, "postName" : "additionalBorrower", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "addcoborrower",
+			"listName": "addCoBorrowerList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+			},			
+			{ 
+				"id": 151, 
+				"name":"cbAddress1" , 
+				"type": "text",
+				"title" : "Co-Borrower's Street Address", 
+				"placeholder" : "Street address", 
+				"errormessage" : "Only 50 characters is allowed.", 
+				"required" : "Please enter Street Address", 
+				"showTitle" : false,
+				"focus": true,
+				"stateName" : "CbAddress1",
+				"queryString" : { "accept" : false, "postName" : "address1", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"customValidation": {
+					"maxcharacter": 50,
+					"externalValidation": 
+					 {
+						"method":"validateCityStateZipAjax",
+						"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+						"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+						"isvalueonly":true,
+						"payloadkey":
+									{
+										"Address": {"name":"CbAddress1","type":"textbox"},
+										"City": {"name":"CbCity","type":"textbox"},
+										"State": {"name":"CbState","type":"dropdown"}
+									},
+						 "validate":{
+							"cityCodeArray": {"name":"cbCity","type":"textbox"},
+							"stateCodeArray": {"name":"cbState","type":"dropdown"},
+							"zipCodeArray": {"name":"cbZipCode","type":"textbox"}
+						}
+					 }
+				},
+				"autoComplete": true,
+				"titleClass": "col-sm-12",
+				"prequalifyButtonClass": " center-align ",
+				"postData": "streetaddress",
+				"extendWidth": true,
+				"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+				"isAddressGroup": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Address1:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].address1",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"parentId": 151,
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 152, 
+				"name":"cbAddress2" ,
+				"type": "text",
+				"title" : "Apartment", 
+				"placeholder" : "Apt, Suite, Bldg. (Optional)", 
+				"errormessage" : "Only 20 characters is allowed.", 
+				"required" : "", 
+				"showTitle" : false,
+				"focus": false,
+				"stateName" : "cbAddress2",
+				"queryString" : { "accept" : false, "postName" : "address2", "skip" : false },
+				"value":"",
+				"extendWidth": true,
+				"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+				"isAddressGroup": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Address2:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].address2",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"parentId": 151,
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 153, 
+				"name":"cbCity" ,
+				"type": "text",
+				"title" : "City", 
+				"placeholder" : "City", 
+				"errormessage" : "Invalid city for selected state", 
+				"required" : "Please enter City", 
+				"showTitle" : false,
+				"focus": false,
+				"stateName" : "CbCity",
+				"queryString" : { "accept" : false, "postName" : "city", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"customValidation": {
+					"externalValidation": 
+					 {
+						"method":"validateCityStateZipAjax",
+						"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+						"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+						"isvalueonly":true,
+						"payloadkey":
+									{
+										"Address": {"name":"CbAddress1","type":"textbox"},
+										"City": {"name":"CbCity","type":"textbox"},
+										"State": {"name":"CbState","type":"dropdown"}
+									},
+						 "validate":{
+							"cityCodeArray": {"name":"CbCity","type":"textbox"},
+							"stateCodeArray": {"name":"CbState","type":"dropdown"},
+							"zipCodeArray": {"name":"CbZipCode","type":"textbox"}
+						}
+					 }
+				},
+				"value":"",
+				"postData": "city",
+				"columnStyle":"text-control-align new-height  col-sm-4 col-xs-12",
+				"isAddressGroup": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "City:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].city",
+					"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+					"parentId": 151,
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 154, 
+				"name":"cbState",
+				"type" : "dropdown",
+				"title" : "",  
+				"placeholder" : "State", 
+				"errormessage" : "Selected state is not valid",
+				"required" : "Please make a selection.", 
+				"showTitle" : false,
+				"listItem":"stateList" ,
+				"focus": false,
+				"stateName" : "CbState",
+				"queryString" : { "accept" : false, "postName" : "state", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				 "customValidation": {
+					"externalValidation": 
+					 {
+						"method":"validateCityStateZipAjax",
+						"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+						"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+						"isvalueonly":true,
+						"payloadkey":
+									{
+										"Address": {"name":"CbAddress1","type":"textbox"},
+										"City": {"name":"CbCity","type":"textbox"},
+										"State": {"name":"CbState","type":"dropdown"}
+									},
+						 "validate":{
+							"cityCodeArray": {"name":"CbCity","type":"textbox"},
+							"stateCodeArray": {"name":"CbState","type":"dropdown"},
+							"zipCodeArray": {"name":"CbZipCode","type":"textbox"}
+						}
+					 }
+				},
+				"value":"",				
+				"postData": "state",
+				"listName": "stateList",
+				"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+				"isAddressGroup": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "State:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].state",
+					"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+					"parentId": 151,
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+				},
+			{ 
+				"id": 155, 
+				"name":"cbZipCode",
+				"type": "text",
+				"title" : "What is your zip code?", 
+				"placeholder" : "Zip", 
+				"errormessage" : "Invalid zip code.", 
+				"required" : "Please enter Zip", 
+				"showTitle" : false,
+				"focus": false,
+				"stateName" : "CbZipCode",
+				"queryString" : { "accept" : false, "postName" : "zipCode", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				 "customValidation": {
+					"externalValidation": 
+					 {
+						"method":"validateCityStateZipAjax",
+						"apiURL":"https://maps.googleapis.com/maps/api/geocode/json?address=",
+						"apikey":"AIzaSyANpZbWlnVftI-HYTH8YdmqDBbjIvUndOs",
+						"isvalueonly":true,
+						"payloadkey":
+									{
+										"Address": {"name":"CbAddress1","type":"textbox"},
+										"City": {"name":"CbCity","type":"textbox"},
+										"State": {"name":"CbState","type":"dropdown"}
+									},
+						 "validate":{
+							"cityCodeArray": {"name":"CbCity","type":"textbox"},
+							"stateCodeArray": {"name":"CbState","type":"dropdown"},
+							"zipCodeArray": {"name":"CbZipCode","type":"textbox"}
+						}
+					 }
+				},
+				"value":"",
+				"postData": "zipcode",
+				"columnStyle":"text-control-align new-height  col-sm-4 col-xs-12  ",
+				"inputType": "tel",
+				"isAddressGroup": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Zip Code:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].zipCode",
+					"columnStyle" : "text-control-align col-sm-4 col-xs-12 ",
+					"parentId": 151,
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 103, 
+				"name":"cbAddress",
+				"type" : "group",
+				"subquestions": [151,152,153,154,155]
+			},
+			{ 
+				"id": 104, 
+				"name":"cbHousingStatus",
+				"type": "button",
+				"title" : "What is co-borrower housing status?", 
+				"placeholder" : "Housing", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : true,
+				"listItem":"housingList",
+				"focus": true,
+				"stateName" : "cbHousingStatus",
+				"queryString" : { "accept" : false, "postName" : "housingStatus", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				  "nextpage":
+				  {
+					  "Default" : "cbCreditScore",
+					  "RENT" : "cbHousingPayment",
+					  "OWN_WITH_MORTGAGE":"cbHousingPayment",
+					  "Own – with mortgage":"cbHousingPayment"
+					  },
+				"value":"",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Housing Status:",
+					"controlType": "dropdown",
+					"editable" : true,
+					"postData":"borrowers[1].housingStatus",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 105, 
+				"name":"cbHousingPayment",
+				"type": "text",
+				"title" : "What is co-borrower monthly housing payment?", 
+				"placeholder" : "$0", 
+				"errormessage" : "Invalid Payment.", 
+				"required" : "Please enter Housing Payment.", 
+				"showTitle" : true,
+				"focus": true,
+				"stateName" : "cbHousingPayment",
+				"queryString" : { "accept" : false, "postName" : "housingPayment", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"isNumber": true,
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"inputType": "tel",
+				"maxLength": "8",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Housing Payment:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].housingPayment",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 106, 
+				"name":"cbCreditScore",
+				"type": "fa-button",
+				"title" : "What is co-borrower's estimated credit score?", 
+				"placeholder" : "Estimated credit score", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : true,
+				"listItem":"estimatedCreditScoreList",
+				"focus": true,
+				"stateName" : "cbCreditScore",
+				"queryString" : { "accept" : false, "postName" : "creditScore", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"listName": "estimatedCreditScoreList",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"extendWidth": true,
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Credit Score:",
+					"controlType": "dropdown",
+					"editable" : true,
+					"postData":"borrowers[1].creditScore",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 107, 
+				"name":"cbDateOfBirth",
+				"type": "masked-text",
+				"title" : "When was co-borrower born?", 
+				"placeholder" : "MM/DD/YYYY", 
+				"pattern" : "date",
+				"errormessage" : "Co-Borrower must be at least 18 years old.", 
+				"required" : "Please enter Birthdate", 
+				"showTitle" : true,
+				"focus": true,
+				"stateName" : "cbDateOfBirth",
+				"queryString" : { "accept" : false, "postName" : "dateOfBirth", "skip" : false },
+				"label":"BirthDate",
+				"validationRules": {
+					"required": true
+				  },
+				  "customValidation": {
+					"minAge" :{"value":"18","rules":"^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$"},
+					"maxAge":{"value":"100","rules":"^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$"}
+				},
+				"value":"",
+				"postData": "birthdate",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Date Of Birth:",
+					"controlType": "masked-text",
+					"editable" : true,
+					"postData":"borrowers[1].dateOfBirth",
+					"postDataPattern": "YYYY-MM-DD",
+					"valuePattern": "MM/DD/YYYY",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 108, 
+				"name":"cbEmploymentStatus",
+				"type": "button",
+				"title" : "What is co-borrower's employment status?", 
+				"placeholder" : "Employment", 
+				"errormessage" : "", 
+				"required" : "Please make a selection.", 
+				"showTitle" : true,
+				"listItem":"employmentList",
+				"focus": true,
+				"stateName" : "cbEmploymentStatus",
+				"queryString" : { "accept" : false, "postName" : "employmentStatus", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"listName": "employmentList",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Employment Status:",
+					"controlType": "dropdown",
+					"editable" : true,
+					"postData":"borrowers[1].employmentStatus",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+				},
+			{ 
+				"id": 109, 
+				"name":"cbAnnualIncome",
+				"type": "text",
+				"title" : "Co-Borrower's Gross Annual Income", 
+				"placeholder" : "$0", 
+				"errormessage" : "", 
+				"errormessagecode" : "Insufficient Annual Income",
+				"custommessage" : "Gross Annual Income between $ 7,200 and $ 10,000,000", 
+				"required" : "Please enter Annual Income", 
+				"showTitle" : true,
+				"focus": true,
+				"stateName" : "cbAnnualIncome",
+				"queryString" : { "accept" : false, "postName" : "annualIncome", "skip" : false },
+				"validationRules": {
+					"required": true					
+				  },
+				"customValidation":
+				{
+					"min-max":"7200-10000000"
+				},
+				"value":"",
+				"errorCode": "MinError",
+				"isNumber": true,
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"inputType": "tel",
+				"showToolTip": true,
+				"tooltipText": "List your total available income including wages, retirement, investments, and rental properties. You are not required to disclose income that is alimony, child support or separate maintenance unless you want to use that income to qualify for a loan. If applicable, include self-employment salary. For total commission earnings, provide an annual average. Increase non-taxable income/benefits by 25%.",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Annual Income:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].annualIncome",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 156, 
+				"name":"cbFirstName",
+				"type": "text",
+				"title" : "Co-Borrower Name", 
+				"placeholder" : "First Name", 
+				"errormessage" : "", 
+				"required" : "Please enter your first name.", 
+				"showTitle" : false,
+				"focus": true,
+				"stateName" : "cbFirstName",
+				"queryString" : { "accept" : false, "postName" : "firstName", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"max": "50",
+				"titleClass": "col-sm-12 col-xs-12",
+				"prequalifyButtonClass": " center-align ",
+				"extendWidth": true,
+				"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "First Name:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].firstName",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				} 
+			},
+			{ 
+				"id": 157, 
+				"name":"cbLastName",
+				"type": "text",
+				"title" : "", 
+				"placeholder" : "Last Name", 
+				"errormessage" : "", 
+				"required" : "Please enter your last name.", 
+				"showTitle" : false,
+				"focus": false,
+				"stateName" : "cbLastName",
+				"queryString" : { "accept" : false, "postName" : "lastName", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				"value":"",
+				"max": "50",
+				"extendWidth": true,
+				"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Last Name:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].lastName",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},{ 
+				"id": 110, 
+				"name":"name",
+				"type": "group",
+				"subquestions": [156,157]
+			},
+			{ 
+				"id": 111, 
+				"name":"cbPrimaryPhoneNumber",
+				"type": "masked-text",
+				"title" : "Co-Borrower's Primary Phone Number", 
+				"placeholder" : "(xxx) xxx-xxxx", 
+				"pattern" : "phone",
+				"errormessage" : "Invalid Primary Phone Number.", 
+				"required" : "Please enter Primary Phone Number", 
+				"showTitle" : true,
+				"focus": true,
+				"col" : 6,
+				"stateName" : "cbPrimaryPhoneNumber",
+				"queryString" : { "accept" : false, "postName" : "primaryPhoneNumber", "skip" : false },
+				"validationRules": {
+					"required": true
+				  },
+				  "customValidation": {
+					"phonenumber":{"value":"1","rules":"\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}"},
+					"externalValidation": 
+					{
+						"method":"commonValidateAPIAJAX",
+						"apiURL":"https://apilayer.net/api/validate?",
+						"apikey":"access_key=86c97b1559bd320f30967010f3150b2b",
+						"isvalueonly":false,
+						"isequalsign":false,
+						"payloadkey":
+									{
+										"number=1": {"name":"cbPrimaryPhoneNumber","type":"textbox"}
+									}
+						
+					}
+			},
+				"value":"",
+				"errorCode": "CodeError",
+				"postData": "phonenumber",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"inputType": "tel",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Phone Number:",
+					"controlType": "masked-text",
+					"editable" : true,
+					"postData":"borrowers[1].primaryPhoneNumber",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},	 
+			{ 
+				"id": 112, 
+				"name":"cbEmailAddress",
+				"type": "text",
+				"title" : "Co-Borrower's Email Address", 
+				"placeholder" : "Email Address", 
+				"errormessage" : "Please enter a valid email address.", 
+				"required" : "Please enter a valid email address.", 
+				"showTitle" : true,
+				"focus": true,
+				"stateName" : "cbEmailAddress",
+				"queryString" : { "accept" : false, "postName" : "emailAddress", "skip" : false },
+				"validationRules": {
+					"required": true,
+					"isEmail":true
+				  },
+					"customValidation": {
+					"EmailAddress":{"value":"1","rules":"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"}
+				},
+				"value":"",
+				"inputType":"email",
+				"showToolTip": true,
+				"tooltipText": "We use email to alert you if there's a problem during the pre-qualification process and about important account information",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"summarySection":"CoBorrower", 
+				"summaryInfo" : {
+					"title" : "Email Address:",
+					"controlType": "text",
+					"editable" : true,
+					"postData":"borrowers[1].emailAddress",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 158, 
+				"name":"cbSSN",
+				"type": "masked-text",
+				"title" : "Please enter co-borrower's SSN", 
+				"placeholder" : "xxx-xx-xxxx", 
+				"pattern" : "ssn",
+				"errormessage" : "Invalid SSN.", 
+				"required" : "Please enter a valid SSN", 
+				"showTitle" : true,
+				"focus": true,
+				"showConsent" :true,
+				"stateName" : "cbSSN",
+				"queryString" : { "accept" : false, "postName" : "ssn", "skip" : false },
+				"validationRules": {
+				"required": true
+				},
+				"value":"",
+				"minLength": "9",
+				"maxLength": "9",
+				"submitForm": true,
+				"formPostURL": "/los-engine/offers",
+				"transactionType" : "addCoBorrower",
+				"buttonText" : "View Pre-Qualified Offers",
+				"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+				"inputType": "tel",
+				"formSubmissionCount" : 2,
+				"summarySection":"CoBorrower",
+				"isPassword" :true,
+				"summaryInfo" : {
+					"title" : "Social Security Number:",
+					"controlType": "masked-text",
+					"editable" : true,
+					"postData":"borrowers[1].ssn",
+					"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+					"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+				}
+			},
+			{ 
+				"id": 161, 
+				"name":"login",
+				"stateName":"Login",
+				"type" : "group",
+				"title" :"Login",
+				"apikey":"action=los_engine_create_borrowers",
+				"action":"los_engine_create_borrowers",
+				"payloadkey":
+				{
+					"wpcustom_user_email": "email",
+					"wpcustom_user_bank_slug": "woodforest",
+					"wpcustom_user_fname": "firstName",
+					"wpcustom_user_uuid": "email",
+					"wpcustom_user_pass": "password",
+					"wpcustom_user_pass_confirm": "password"
+				},
+				"loaderMessage": "Creating your account please wait ...",
+				"showDynamicModalPopup": true,
+				"dynamicModalPopupContent": "<h3>Thank you!</h3><br/><h4>Your account has been created.</h4><br/><h4>We are sending an email to your inbox with a link to verify your account.</h4><br/><h4>In order to access your account in future, you will need to click the link in that email to verify the account (you do not need to do it at this time).</h4><br/>",
+				"dynamicModalPopupButtonText": "Continue with Application",
+				"nextFocusElement": "employerName",
+				"subquestions": [162, 163, 164]
+			},
+			{ 
+			"id": 162,
+			"name":"email",
+			"stateName":"Email",
+			"type": "login",
+			"title" : "Great Choice!",
+			"description": "Let's create your account.", 
+			"fieldtitle": "Email:",
+			"placeholder" : "Email Address", 
+			"errormessage" : "Please enter a valid Email Address.", 
+			"required" : "Please enter Email Address.", 
+			"showTitle" : true,
+			"focus": true,
+			"postData": "emailAddress",
+			"isDisabled": true,
+			"customValidation": {
+				"EmailAddress":{"value":"1","rules":"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"}
+			}
+		},		
+		{ 
+			"id": 163, 
+			"name":"password",
+			"stateName":"Password",
+			"type": "login",
+			"title" : "Password:", 
+			"placeholder" : "Password", 
+			"required" : "Please enter a Password.", 
+			"errormessage" : "Password does not match security requirements.", 
+			"showTitle" : false,
+			"focus": false,
+			"validationRules": {
+				"required": true				
+			  },
+			  "customValidation": {
+				"characters": 8,
+				"lowercase letter":{"value":"1","rules":"[a-z]"},
+				"uppercase letter":{"value":"1","rules":"[A-Z]"},
+				"number":{"value":"1","rules":"[0-9]"},
+				"special character":{"value":"1","rules":"[!@#$%^&*]"}
+			  }
+		},
+		{ 
+			"id": 164, 
+			"name":"verifyPassword",
+			"stateName":"VerifyPassword",
+			"type": "login",
+			"title" : "Verify Password:", 
+			"placeholder" : "Verify Password", 
+			"required" : "Please verify password.", 
+			"errormessage" : "Passwords do not match!",
+			"showTitle" : false,
+			"focus": false,
+			"match":
+			{
+				"password": true
+			},
+			"validationRules": {
+				"required": true				
+			},
+			"value":""
+		},
+		{ 
+			"id": 165, 
+			"name":"bankLinking",
+			"stateName":"BankLinking",
+			"type" : "bank-link",
+			"title" : "Bank Account Information", 
+			"plaidDescription" : "In order to verify your bank account, we partner with Plaid. Plaid is a trusted service that is widely used by most major U.S Banks. It allows you to log into your bank and choose the bank account in which you would like to have your loan proceeds distributed. Click below to proceed",
+			"plaidButtonText": "Proceed with Plaid",
+			"bankDescription" : "If you are unable to access your bank via Plaid, you may click the 'Proceed without Plaid' button below ( this will require a manual review of your bank account and could delay your funds).",
+			"bankButtonText": "Proceed without Plaid",
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 ",
+			"showActionButton" : "no",
+			"nextpage":
+			{
+				"Default": "docusign",
+				"withoutPlaid" : "withoutPlaid"
+			},
+			"action": "los_engine_process_plaid",
+			"loaderMessage": "Validating Bank Account <br/><br/> Linking Bank Account ",
+			"delayMessageDisplay": true,
+			"formSubmissionCount" : 4
+		},		
+		{ 
+			"id": 167, 
+			"name":"withoutPlaid",
+			"type" : "group",
+			"title" :  "Bank Account Information",
+			"apikey":"action=los_engine_bank_data_submit",
+			"action":"los_engine_bank_data_submit",
+			"payloadkey":
+			{
+				"bankName":"BankName",
+   				"bankRoutingNumber":"BankRoutingNumber",
+   				"bankAccountNumber":"BankAccountNumber" 
+			},
+			"subquestions": [168, 169, 170]
+		},
+		{ 
+			"id": 168, 
+			"name":"bankName",
+			"stateName":"BankName",
+			"type" : "text",
+			"title" : "Bank Name, Bank Routing & Bank Account Number",  
+			"placeholder" : "Bank Name", 
+			"required" : "Please enter Bank Name", 
+			"validationRules": {
+				"required": true
+			},
+			"showTitle" : true,
+			"focus": true,
+			"display":false,
+			"value":"",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+		},
+		{ 
+			"id": 169,
+			"name":"bankRoutingNumber",
+			"stateName":"BankRoutingNumber",
+			"type" : "masked-text",
+			"title" : "Bank Routing Number",  
+			"placeholder" : "xxxxxxxxx", 
+			"errormessage" : "", 
+			"validationRules": {
+				"required": true
+			},
+			"required" : "Please enter Routing Number", 
+			"showTitle" : false,
+			"focus": false,
+			"display":false,
+			"pattern" : "bankRoutingNumber",
+			"value":"",
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 "
+		},
+		{ 
+			"id": 170, 
+			"name":"bankAccountNumber",
+			"stateName":"BankAccountNumber",
+			"type" : "masked-text",
+			"title" : "Bank Account Number",  
+			"placeholder" : "xxxxxxxxxx-xx", 
+			"errormessage" : "", 
+			"validationRules": {
+				"required": true
+			},
+			"required" : "Please enter Account Number", 
+			"showTitle" : false,
+			"focus": false,
+			"display":false,
+			"pattern" : "bankAccountNumber",
+			"value":"",
+			"columnStyle":"text-control-align col-sm-6 col-xs-12 "
+		},
+		{ 
+			"id": 173, 
+			"name":"bankStatement",
+			"stateName":"BankStatement",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Bank Statement",
+			"title" : "Please upload a copy of your latest bank statement.", 
+			"description" : "We require the most recent bank statements for the account you entered in the previous step. Please upload your documents using the inputs below.",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"payloadkey":
+			{
+				"bankStatement": "BankStatement"
+			},
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 ",
+			"loaderMessage": ""
+		},
+		{ 
+			"id": 174, 
+			"name":"docusign",
+			"type": "docusign",
+			"title" : "You're almost finished !", 
+			"description": "For document signatures, we have partnered with Docusign. When you click the Proceed button below, you will be transfered to Docusign. Once there, simply click the yellow start button and sign and intial as prompted. When you are finished, you will be returned here.",
+			"showTitle" : true,
+			"buttonText":"Proceed to Docusign",
+			"focus": true,
+            "stateName" : "docusignUrl",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"showActionButton": "no",
+			"loaderMessage": "Generating documents for signature",
+			"delayMessageDisplay": true,
+			"onPageLoad" : true
+        },
+		{ 
+			"id": 200, 
+			"name":"thankYou",
+			"type": "label",
+			"title" : "Thank You!",
+			"description": "We will get back to you once we verify your details.",
+			"showTitle" : true,
+			"showActionButton": "no"
+		},
+		{ 
+			"id": 301, 
+			"name":"lenderName",
+			"type": "label",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Lender Name:",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.lenderName",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 302, 
+			"name":"APR",
+			"type": "label",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "APR:",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.APR",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": "%",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},{ 
+			"id": 303, 
+			"name":"term",
+			"type": "label",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Term:",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.term",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"prefix":"",
+				"suffix": " Months",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},{ 
+			"id": 304, 
+			"name":"monthlyPayment",
+			"type": "label",			
+			"isNumber": true,
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Monthly Payment:",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.monthlyPayment",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 500, 
+			"name":"blankRow",
+			"type": "label",
+			"summarySection":"PrimaryBorrower",
+			"summaryInfo" : {
+				"title" : "",
+				"editable" : false,
+				"postData":"",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 501, 
+			"name":"blankRow",
+			"type": "label",
+			"summarySection":"CoBorrower",
+			"summaryInfo" : {
+				"title" : "",
+				"editable" : false,
+				"controlType" : "label",
+				"postData":"",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 503, 
+			"name":"borrowerConsent",
+			"type": "label",
+			"errormessage" : "",
+			"required" : "Please check at least one Product Type",
+			"showCheckbox" : true,
+			"stateName":"BorrowerConsent",
+			"summarySection":"EmploymentInformation",
+			"summaryInfo" : {
+				"title" : "I consent to <b>Jesus Obrero Coopertiva</b> conducting a hard credit pull.",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"this.props.configSettings.themeConfig.consentText",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"isConsent" : true,
+				"titleCSS" : "col-sm-9 col-xs-6 summarypage-margin-zero employmentConsent"
+			}
+		},
+		{ 
+			"id": 504, 
+			"name":"coBorrowerConsent",
+			"type": "label",
+			"errormessage" : "",
+			"required" : "Please check at least one Product Type",
+			"showCheckbox" : true,	
+			"stateName":"CoBorrowerConsent",		 
+			"summarySection":"CoBorrower",
+			"summaryInfo" : {
+				"title" : "I consent to <b>Jesus Obrero Coopertiva</b> conducting a hard credit pull.",
+				"controlType" : "label",
+				"editable" : false,
+				"postData":"",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"isConsent" : true,
+				"titleCSS" : "col-sm-9 col-xs-6 summarypage-margin-zero employmentConsent"
+			}
+		},
+		{ 
+			"id": 505, 
+			"name" : "desiredTerm",
+			"type" : "dropdown",
+			"title" : "Desired Loan Term", 
+			"placeholder" : "Select a loan term", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"loanTermList",
+			"focus": true,
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"stateName" : "DesiredTerm",
+			"queryString" : { "accept" : true, "postName" : "desiredTerm", "skip" : true },
+			"postData": "desiredTerm",
+			"listName": "loanTermList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Loan Term",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.desiredTerm",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 205, 
+			"name":"thankyoupage",
+			"type": "label",
+			"title" : "Thank you for choosing GDS Link to assist you with your Auto Loan needs!", 
+			"description": "Let’s get started!",
+			"showTitle" : true,
+			"buttonText" : "Continue",
+			"showActionButton": "yes"
+		},
+		{ 
+			"id": 206, 
+			"name":"loanSubPurpose",
+			"type": "button",
+			"title" : "Are you purchasing a new or used car?", 
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "Please make a selection.", 
+			"showTitle" : true,
+			"listItem":"CarStatusList",
+			"focus": true,
+            "stateName" : "LoanSubPurpose",
+			"queryString" : { "accept" : false, "postName" : "loanSubPurpose", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "housing",
+			"listName": "CarStatusList",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 "
+        },
+		{ 
+			"id": 207, 
+			"name":"vehiclePrice", 
+			"type": "text",
+			"title" : "What is the purchase price of the vehicle?", 
+			"placeholder" : "$0", 
+			"errormessage" : "", 
+			"required" : "Please enter purchase price of the vehicle", 
+			"custommessage" : "Purchase price of the vehicle must be between $1 to $250,000", 
+			"showTitle" : true,
+			"focus": true,
+			"label":"",
+            "stateName" : "VehiclePrice",
+			"queryString" : { "accept" : true, "postName" : "vehiclePrice", "skip" : true },
+			"validationRules": {
+				"required": true			
+			  },
+			"customValidation":
+			{
+				"min-max":"1-250000"
+			},
+			"value":"",
+			"errorCode": "MinError",
+			"isNumber": true,
+			"postData": "vehiclePrice",			
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel"	
+        },
+		{ 
+			"id": 208, 
+			"name" : "tradingInVehicle",
+			"type" : "button",
+			"title" : "Are you trading in a vehicle and applying the value to your down payment?", 
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"yesorNoButtonList",
+			"focus": true,
+			"stateName" : "TradingInVehicle",
+			"queryString" : { "accept" : false, "postName" : "tradingInVehicle", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "tradingInVehicle",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"conditionalrules":"true"
+        },
+		{ 
+			"id": 209, 
+			"name":"tradeInValue", 
+			"type": "text",
+			"title" : "What is the Trade-In value of your old vehicle?", 
+			"placeholder" : "$0", 
+			"errormessage" : "Trade-in value can not be the same as vehicle price", 
+			"required" : "Please enter trade-in value of your old vehicle", 
+			"custommessage" : "Maximum trade-in value of your old vehicle is $100,0000", 
+			"showTitle" : true,
+			"focus": true,
+			"label":"",
+            "stateName" : "TradeInValue",
+			"queryString" : { "accept" : true, "postName" : "tradeInValue", "skip" : true },
+			"validationRules": {
+				"required": true			
+			  },
+			"customValidation":
+			{
+				"min-max":"1-1000000"
+			},
+			"value":"",
+			"errorCode": "MinError",
+			"isNumber": true,
+			"postData": "tradeInValue",			
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel"	
+        },
+		{ 
+			"id": 210, 
+			"name" : "downPayment",
+			"type" : "button",
+			"title" : "Are you making a down payment on this loan?", 
+			"placeholder" : "", 
+			"errormessage" : "Please make a selection", 
+			"required" : "Please make a selection", 
+			"showTitle" : true,
+			"listItem":"yesorNoButtonList",
+			"focus": true,
+			"stateName" : "DownPayment",
+			"queryString" : { "accept" : false, "postName" : "downPayment", "skip" : false },
+			"validationRules": {
+				"required": true
+			  },
+			"value":"",
+			"postData": "downPayment",
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"conditionalrules":"true"
+        },
+		{ 
+			"id": 211, 
+			"name":"downPaymentAmount", 
+			"type": "text",
+			"title" : "How much is the down payment you are making on this loan?", 
+			"placeholder" : "$0", 
+			"errormessage" : "Total of trade-in value and down payment can not be greater than vehicle price", 
+			"required" : "Please enter down payment", 
+			"custommessage" : "Maximum down payment amount is $250,000", 
+			"showTitle" : true,
+			"focus": true,
+			"label":"",
+            "stateName" : "DownPaymentAmount",
+			"queryString" : { "accept" : true, "postName" : "downPaymentAmount", "skip" : true },
+			"validationRules": {
+				"required": true			
+			  },
+			"customValidation":
+			{
+				"min-max":"1-250000"
+			},
+			"value":"",
+			"errorCode": "MinError",
+			"isNumber": true,
+			"postData": "downPaymentAmount",			
+			"columnStyle":"text-control-align col-sm-12 col-xs-12 ",
+			"inputType": "tel"	
+        },
+		{ 
+			"id": 226, 
+			"name":"loanAmount",
+			"type": "label",
+			"title" : "Based on the information you provided, the amount you are borrowing for this loan is:",
+			"description": "${{X}}",
+			"showTitle" : true,
+			"buttonText" : "Continue",
+			"showActionButton": "yes",
+			"stateName" : "LoanAmount",
+			"conditionalrules":"true",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Loan Amount:",
+				"controlType": "text",
+				"editable" : false,
+				"postData":"borrowers[0].offerData.loanAmount",
+				"columnStyle" : "text-control-align col-sm-6 col-xs-12 ",
+				"titleCSS" : "col-sm-3 col-xs-6 summarypage-margin-zero"
+			}
+		},
+		{ 
+			"id": 231, 
+			"name":"fileupload",
+			"type" : "group",
+			"title" :  "Bank Account Information",
+			"subquestions": [228, 229, 230],
+			"extendWidth": true
+		},
+		{ 
+			"id": 228, 
+			"name":"bankInformations",				 
+			"type": "label",
+			"title" : "We require identification in the form of a valid picture ID (drivers license, passport, state ID or voter ID) and the most recent bank statements for the account you entered in the previous step.", 
+			"description": "Please upload your documents using the inputs below.",
+			"showTitle" : true,
+			"buttonText" : "Continue",
+			"showActionButton": "yes",
+			"nextpage":{
+				"Default" : "thankYou"
+			}
+		},
+		{ 
+			"id": 229, 
+			"name":"photoID",
+			"stateName":"PhotoID",
+			"type" : "file-upload",
+			"inputType": "file",
+			"title" : "Photo Id", 
+			"header": "",
+			"description" : "",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select JPG, JPEG, PNG format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["png", "jpeg"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"payloadkey":
+			{
+				"photoID": "PhotoID"
+			},
+			"extendWidth": true,
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6  col-xs-12 "
+		},
+		{ 
+			"id": 230, 
+			"name":"bankStatementManual",
+			"stateName":"BankStatementManual",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "",
+			"title" : "Bank Statement", 
+			"description" : "",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": false,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"payloadkey":
+			{
+				"bankStatementManual": "BankStatementManual"
+			},
+			"columnStyle":"text-control-align new-height updated-margin col-sm-6 col-xs-12",
+			"extendWidth": true
+		},
+		{ 
+			"id": 177, 
+			"name":"documentListInfo",
+			"type": "documentlist",
+			"title" : "We now need to collect the following documents. You will be required to upload copies / photos of them. If you do not have copies or photos handy, you may always return at a later time and login with your email and password.", 
+			"description" : "In addition, you may use your phone to take pictures of the documents and upload them. Simply go to <URL> on your phone’s browser and log in with your email and password.",
+			"placeholder" : "", 
+			"errormessage" : "", 
+			"required" : "", 
+			"showTitle" : false,
+			"focus": false,
+			"listItem":"uploadDocumentList",
+			"conditionalrules":"true",
+			"conditionalruleslist" :["BankStatement"]
+		},
+		{ 
+			"id": 178, 
+			"name":"proofofResidence",
+			"stateName":"ProofofResidence",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Proof of Residence",
+			"title": "This is a utility bill or business correspondence to your residence.",
+			"description" : "Please click “Choose File...” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"loaderMessage":"Uploading File...",
+			"payloadkey":
+			{
+				"ProofofResidence": "ProofofResidence"
+			},
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 ",
+			"conditionalrules": "true"
+		},
+		{ 
+			"id": 179,
+			"name":"proofofInsurance",
+			"stateName":"ProofofInsurance",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Proof of Homeowners, Hazard, and Flood Insurance",
+			"title" : "This is a copy or photo of your insurance card or insurance policy.",
+			"description" : "Please click “Choose File…” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select JPG, JPEG, PNG format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["png", "jpeg"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"loaderMessage":"Uploading File...",
+			"payloadkey":
+			{
+				"ProofofInsurance": "ProofofInsurance"
+			},
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 ",
+			"conditionalrules":"true"
+		},
+		{ 
+			"id": 215,
+			"name":"identification",
+			"stateName":"Identification",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Identification",
+			"title" : "This can be a passport, legal photo ID, or driver’s license.", 
+			"description" : "Please click “Choose File...” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"loaderMessage":"Uploading File...",
+			"payloadkey":
+			{
+				"Identification": "Identification"
+			},
+			"conditionalrules":"true",
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 "
+		},
+		{ 
+			"id": 216, 
+			"name":"yourMostRecentPayStub",
+			"stateName":"YourMostRecentPayStub",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Your Most Recent Pay Stub",
+			"title":"Please upload a copy of your most recent pay stub that also shows your year-to-date income",
+			"description":"Please click “Choose File...” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"loaderMessage":"Uploading File...",
+			"payloadkey":
+			{
+				"YourMostRecentPayStub": "YourMostRecentPayStub"
+			},
+			"conditionalrules":"true",
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 "
+		},{ 
+			"id": 217, 
+			"name":"yourMostRecentTaxReturns",
+			"stateName":"YourMostRecentTaxReturns",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Your Most Recent Tax Returns",
+			"title":"Because you are self-employed we require you to upload your tax returns for the previous two years",
+			"description":"Please click “Choose File...” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"loaderMessage":"Uploading File...",
+			"payloadkey":
+			{
+				"YourMostRecentTaxReturns": "YourMostRecentTaxReturns"
+			},
+			"conditionalrules":"true",
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 "	
+		},
+		{ 
+			"id": 218, 
+			"name":"purchaseVehicleVIN", 
+			"type": "text",
+			"stateName":"PurchaseVehicleVIN",
+			"title" : "We now need to collect some information about the vehicle you are purchasing.", 
+			"description" : "What is the VIN (Vehicle Identification Number)?",
+			"placeholder" : "Vehicle Identification Number", 
+			"errormessage" : "Please Enter valid Vehicle Identification Number", 
+			"errormessagecode" : "", 
+			"required" : "Please Enter Vehicle Identification Number", 
+			"showTitle" : true,
+			"focus": true,
+			"validationRules": {
+				"required": true
+			},
+			"conditionalrules":"true"
+		},
+		{ 
+			"id": 1001,
+			"name" : "vehicleYear",
+			"type" : "vehicle-dropdown",
+			"title" : "About the vehicle being purchased:", 
+			"placeholder" : "",
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleYearList",
+			"vehicleType" : "Year",
+			"nextVehicleType" : "Make",
+			"numberOfYears" : 25,
+			"focus": true,
+			"multiDropdown" : true,
+			"multiControlAction" : { "currentControl": "Year", "nextControl" : "MakeName", "resetControl" : ["VehicleMake","VehicleMakeModel"]},
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "VehicleYear",
+			"queryString" : { "accept" : true, "postName" : "vehicleYear", "skip" : true },
+			"postData": "vehicleYear",
+			"extendWidth": true,
+			"titleClass": "col-sm-12 col-xs-12",
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Year",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].vehicleYear",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1002, 
+			"name" : "vehicleMake",
+			"type" : "vehicle-dropdown",
+			"title" : "Make", 
+			"placeholder" : "Select a make", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleMakeList",
+			"vehicleType" : "Make",
+			"nextVehicleType" : "Model",
+			"focus": false,
+			"multiDropdown" : true,
+			"multiControlAction" : { "currentControl": "MakeName", "nextControl" : "ModelName", "resetControl" : ["VehicleMakeModel"]},
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "VehicleMake",
+			"queryString" : { "accept" : true, "postName" : "vehicleMake", "skip" : true },
+			"postData": "vehicleMake",
+			"extendWidth": false,
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Make",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].vehicleMake",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1003, 
+			"name" : "vehicleModel",
+			"type" : "vehicle-dropdown",
+			"title" : "Model", 
+			"placeholder" : "Select a model", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleModelList",
+			"vehicleType" : "Model",
+			"focus": false,
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "VehicleModel",
+			"queryString" : { "accept" : true, "postName" : "vehicleModel", "skip" : true },
+			"postData": "vehicleModel",
+			"extendWidth": false,
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Model",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].vehicleModel",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1000, 
+			"name":"vehiclePurchasedInfo",
+			"type" : "group",
+			"subquestions": [1001,1002,1003]
+        },
+		{ 
+			"id": 219, 
+			"name":"purchaseFileUpload",
+			"stateName":"PurchaseFileUpload",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Vehicle Title of the car being purchased",
+			"title" : "Please upload a copy of the title of the vehicle you are purchasing.", 
+			"description" : "Please click “Choose File…” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"payloadkey":
+			{
+				"purchaseFileUpload": "PurchaseFileUpload"
+			},
+			"loaderMessage": "",
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 "
+		},
+		{ 
+			"id": 220, 
+			"name":"tradingVehicleVIN", 
+			"type": "text",
+			"stateName":"TradingVehicleVIN",
+			"title" : "We now need to collect some information about the vehicle you are trading in.", 
+			"description" : "What is the VIN (Vehicle Identification Number)?",
+			"placeholder" : "Vehicle Identification Number", 
+			"errormessage" : "Please Enter valid Vehicle Identification Number", 
+			"errormessagecode" : "This is the same VIN you entered for the Purchase Vehicle", 
+			"required" : "Please Enter Vehicle Identification Number", 
+			"showTitle" : true,
+			"focus": true,
+			"validationRules": {
+				"required": true
+			},
+			"conditionalrules":"true"
+		},
+		{ 
+			"id": 221, 
+			"name":"tradingFileUpload",
+			"stateName":"TradingFileUpload",
+			"type" : "file-upload",
+			"inputType": "file",
+			"header": "Vehicle Title of the Car Being Traded-In",
+			"title" : "Please upload a copy of the title of the vehicle you are trading in.", 
+			"description" : "Please click “Choose File…” to select the file or photo to upload. Once you have selected the file you wish to upload, click “Upload File”",
+			"placeholder" : "Title.jpg", 
+			"errormessage" : "Please select PDF, JPG, JPEG, PNG, TXT, DOC, DOCX format below 2MB", 
+			"showTitle" : true,
+			"focus": true,
+			"allowedFormats": ["pdf", "png", "jpeg","txt","doc", "docx"],
+			"maxFileSize": "2",
+			"apikey":"action=los_engine_document_upload",
+			"action":"los_engine_document_upload",
+			"buttonText" : "Upload File",
+			"payloadkey":
+			{
+				"tradingFileUpload": "TradingFileUpload"
+			},
+			"loaderMessage": "",
+			"columnStyle":" text-control-align col-sm-12 col-xs-12 "
+		},
+		{ 
+			"id": 1004,
+			"name" : "tradingVehicleYear",
+			"type" : "vehicle-dropdown",
+			"title" : "About the vehicle being purchased:", 
+			"placeholder" : "",
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleYearList",
+			"vehicleType" : "Year",
+			"nextVehicleType" : "Make",
+			"numberOfYears" : 25,
+			"focus": true,
+			"multiDropdown" : true,
+			"multiControlAction" : { "currentControl": "Year", "nextControl" : "MakeName", "resetControl" : ["VehicleMake","VehicleMakeModel"]},
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "TradingVehicleYear",
+			"queryString" : { "accept" : true, "postName" : "vehicleYear", "skip" : true },
+			"postData": "tradingVehicleYear",
+			"extendWidth": true,
+			"titleClass": "col-sm-12 col-xs-12",
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Year",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].tradingVehicleYear",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1005, 
+			"name" : "tradingVehicleMake",
+			"type" : "vehicle-dropdown",
+			"title" : "Make", 
+			"placeholder" : "Select a make", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleMakeList",
+			"vehicleType" : "Make",
+			"nextVehicleType" : "Model",
+			"focus": false,
+			"multiDropdown" : true,
+			"multiControlAction" : { "currentControl": "MakeName", "nextControl" : "ModelName", "resetControl" : ["VehicleMakeModel"]},
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "TradingVehicleMake",
+			"queryString" : { "accept" : true, "postName" : "tradingVehicleMake", "skip" : true },
+			"postData": "tradingVehicleMake",
+			"extendWidth": false,
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Make",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].tradingVehicleMake",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1006, 
+			"name" : "tradingVehicleModel",
+			"type" : "vehicle-dropdown",
+			"title" : "Model", 
+			"placeholder" : "Select a model", 
+			"errormessage" : "Please make a selection.", 
+			"required" : "Please make a selection.", 
+			"showTitle" : false,
+			"listItem":"vehicleModelList",
+			"vehicleType" : "Model",
+			"focus": false,
+			"validationRules": {
+				"required": true
+			},
+			"value":"",
+			"stateName" : "TradingVehicleModel",
+			"queryString" : { "accept" : true, "postName" : "tradingVehicleModel", "skip" : true },
+			"postData": "tradingVehicleModel",
+			"extendWidth": false,
+			"columnStyle":"text-control-align col-sm-4 col-xs-12 ",
+			"summarySection":"LoanInformation",
+			"summaryInfo" : {
+				"title" : "Model",
+				"controlType": "dropdown",
+				"editable" : false,
+				"postData":"borrowers[0].tradingVehicleModel",
+				"columnStyle" : "text-control-align col-sm-4 col-xs-12 "
+			}
+        },
+		{ 
+			"id": 1007, 
+			"name":"vehiclePurchasedInfo",
+			"type" : "group",
+			"subquestions": [1001,1002,1003]
+        }
+
+	],
+	"versions" : [
+            { 
+                "versionNumber" : "default",
+				"questions" : [
+					205,206,207,208,209,210,211,226,3,4,5,6,7,8,9,10,11,12,58,
+					103,104,105,106,107,108,109,110,111,112,158,161,
+					39,40,165,167,231,200,
+					177,173,178,179,215,218,1000,219,220,221,216,217,174
+				],
+				"summaryQuestions" : [
+					301,226,302,303,304,
+					56,57,12,11,51,52,53,54,55,500,4,5,6,7,9,58,
+					31,32,33,34,37,38,61,62,63,64,65,66,8,503,
+					156, 157,112, 111, 151,152,153,154,155,501,104, 105, 106, 107, 108, 109,    158,501,504
+				]
+            },  
+            { 
+				"versionNumber" : "1",
+				"questions" : [
+					12,13,16,17,18,19,1,2,8,9,20,10,11,
+					39
+				]                   
+            }		 
+	]
+}

@@ -1,0 +1,43 @@
+{
+    "Response": {
+        "TransactionType": "reusable_offers_check",
+        "ApplicationID": "7002",
+        "ApplicationInfo": {
+            "ApplicationID": "7002",
+            "ApplicationDate": "6/15/2021 02:45:34",
+            "firstname": "Jerry",
+            "loanamount": 60000,
+            "loanpurpose": "Home Improvement"
+        },
+        "errorMessage": "",
+        "httpErrorCode": "",
+        "dealerid": "1001",
+        "outcome": "offers available",
+        "Lenders": {},
+        "Offers": [
+            {
+                "Lender": "LightStream",
+                "OfferID": "LightStream-536088",
+                "applicant_id": "99999",
+                "LoanAmount": 50000,
+                "creditLimit": 0,
+                "APR": 5.74,
+                "MonthlyPayment": 593.88,
+                "Term": 108,
+                "ExpirationDate": "",
+                "OfferURL": "https://www.lightstream.com",
+                "ContactName": "",
+                "ContactEmail": "",
+                "ContactPhone": "",
+                "OriginationFee": 0,
+                "OfferType": "",
+                "Secure": "U",
+                "Disclaimer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada nibh a lorem mollis dapibus. Nunc maximus ante nec diam maximus, in semper ex ornare. Maecenas tincidunt ornare tellus hendrerit eleifend. Integer at iaculis nunc. Proin a lobortis augue, et ultricies nulla. Nulla ut venenatis augue.",
+                "displayOffer": "true",
+                "cbRequired": "false",
+                "productType": "Personal Loan",
+                "acornGen": ""
+            }
+        ]
+    }
+}
